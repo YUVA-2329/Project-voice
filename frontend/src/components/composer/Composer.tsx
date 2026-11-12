@@ -5,8 +5,9 @@ import { ErrorNote } from "@/components/ui/ErrorNote";
 import { VoiceSelector, useSelectedVoice } from "@/components/voice/VoiceSelector";
 import { useCreateGeneration, useGeneration, useMe } from "@/lib/api/hooks";
 import { isApiError } from "@/lib/api/client";
-import { MAX_TEXT_CHARS, type GenerationCreate } from "@/lib/api/types";
+import { MAX_TEXT_CHARS, type GenerationCreate, type LanguageHint } from "@/lib/api/types";
 import { GenerationResult } from "./GenerationResult";
+import { LanguageIndicator } from "./LanguageIndicator";
 import { RunButton } from "./RunButton";
 import { TextComposer } from "./TextComposer";
 
@@ -44,6 +45,7 @@ export function Composer({ advanced = false, params, chips, controls }: Composer
   const { selected, readyVoices, isPending: voicesPending } = useSelectedVoice();
   const create = useCreateGeneration();
   const [text, setText] = useState("");
+  const [language, setLanguage] = useState<LanguageHint>(params?.language ?? "auto");
   const [generationId, setGenerationId] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -76,7 +78,7 @@ export function Composer({ advanced = false, params, chips, controls }: Composer
       const body: GenerationCreate = {
         voice_id: voiceId,
         text: body_text,
-        language: params?.language ?? prefs?.default_language ?? "auto",
+        language: language !== "auto" ? language : (params?.language ?? prefs?.default_language ?? "auto"),
         speed: params?.speed ?? prefs?.speed ?? 1,
         output_format: params?.output_format ?? prefs?.output_format ?? "wav",
       };
@@ -85,7 +87,7 @@ export function Composer({ advanced = false, params, chips, controls }: Composer
       if (engine) body.engine_id = engine;
       create.mutate(body, { onSuccess: (gen) => setGenerationId(gen.id) });
     },
-    [running, create, me.data, params, advanced],
+    [running, create, me.data, params, advanced, language],
   );
 
   const run = useCallback(() => {
@@ -122,7 +124,7 @@ export function Composer({ advanced = false, params, chips, controls }: Composer
           onChange={setText}
           onRun={run}
           disabled={Boolean(running) || create.isPending}
-          chips={chips}
+          chips={chips ?? <LanguageIndicator text={text} selectedLanguage={language} onSelectLanguage={setLanguage} />}
         />
         {controls}
         <div className="flex flex-wrap items-start justify-between gap-3">

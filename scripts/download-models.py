@@ -356,6 +356,26 @@ def fetch_indicf5(models_dir: Path, token: str | None) -> None:
     log("# plus the IndicF5 runtime: pip install git+https://github.com/ai4bharat/IndicF5.git")
 
 
+def fetch_indic(models_dir: Path, langs: list[str] | None = None) -> None:
+    langs = langs or ["te", "ta", "hi"]
+    base_url = "https://huggingface.co/sriram09764/itantra-tts-onnx/resolve/main"
+    indic_dir = models_dir / "indic"
+    indic_dir.mkdir(parents=True, exist_ok=True)
+    log(f"[indic] fetching lightweight Indic ONNX models for: {', '.join(langs)}")
+    for lang in langs:
+        target_dir = indic_dir / lang
+        target_dir.mkdir(parents=True, exist_ok=True)
+        for fname in ["config.json", "tokens.txt", "model.onnx"]:
+            dest = target_dir / fname
+            if dest.is_file() and dest.stat().st_size > 0:
+                log(f"  {lang}/{fname} already present ({dest.stat().st_size / (1024*1024):.2f} MB)")
+                continue
+            url = f"{base_url}/{lang}/{fname}"
+            log(f"  downloading {url} -> {dest}")
+            urllib.request.urlretrieve(url, dest)
+    log("[indic] all requested models verified and ready on disk.")
+
+
 # --------------------------------------------------------------------------------------------
 # main
 # --------------------------------------------------------------------------------------------
@@ -387,6 +407,11 @@ def main(argv: list[str] | None = None) -> int:
         help="download ai4bharat/IndicF5 (gated) from Hugging Face",
     )
     parser.add_argument(
+        "--indic",
+        action="store_true",
+        help="download lightweight Indic ONNX models (Telugu, Tamil, Hindi)",
+    )
+    parser.add_argument(
         "--hf-token", default=os.environ.get("PV_HF_TOKEN") or os.environ.get("HF_TOKEN")
     )
     args = parser.parse_args(argv)
@@ -395,11 +420,13 @@ def main(argv: list[str] | None = None) -> int:
     models_dir.mkdir(parents=True, exist_ok=True)
     log(f"models dir: {models_dir}")
 
-    if args.f5tts or args.indicf5:
+    if args.f5tts or args.indicf5 or args.indic:
         if args.f5tts:
             fetch_f5tts(models_dir, args.f5tts, args.hf_token)
         if args.indicf5:
             fetch_indicf5(models_dir, args.hf_token)
+        if args.indic:
+            fetch_indic(models_dir)
         return 0
 
     wanted = set(args.only or ["zipvoice", "whisper", "vad"])
