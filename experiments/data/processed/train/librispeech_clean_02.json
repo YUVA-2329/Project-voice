@@ -1,0 +1,19 @@
+{
+  "id": "librispeech_clean_02",
+  "dataset": "LibriSpeech test-clean (OpenSLR 12)",
+  "license": "CC-BY-4.0",
+  "speaker": "spk_1272",
+  "gender": "male",
+  "language": "en",
+  "detected_language": "en",
+  "split": "train",
+  "file": "experiments\\data\\processed\\train\\librispeech_clean_02.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 3.275,
+  "speech_seconds": 2.318,
+  "snr_db": 31.22,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "SWEET CHEEKS",
+  "asr_verified_transcript": "Stuffed into you, his belly counseled him."
+}

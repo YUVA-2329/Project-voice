@@ -1,0 +1,19 @@
+{
+  "id": "librispeech_clean_03",
+  "dataset": "LibriSpeech test-clean (OpenSLR 12)",
+  "license": "CC-BY-4.0",
+  "speaker": "spk_1272",
+  "gender": "male",
+  "language": "en",
+  "detected_language": "en",
+  "split": "train",
+  "file": "experiments\\data\\processed\\train\\librispeech_clean_03.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 6.625,
+  "speech_seconds": 5.87,
+  "snr_db": 37.16,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "HE STOOD THERE STILL",
+  "asr_verified_transcript": "After early nightfall, the yellow lamps would light up here and there, the squalid quarter of the brothels."
+}

@@ -1,0 +1,638 @@
+# Project Voice Domain-Specific Expanded Lexicon (with Case Coverage)
+# Format: word || space-separated IPA phones (matching ZipVoice tokens.txt)
+
+AIOPS || ˈ e ɪ ˈ a ɪ ˌ ɑː p s
+ALEMBIC || ə l ˈ ɛ m b ɪ k
+ANGULAR || ˈ æ ŋ ɡ j ə l ɚ
+API || ˈ e ɪ p ˈ iː ˈ a ɪ
+APIS || ˈ e ɪ p ˈ iː ˈ a ɪ z
+APIs || ˈ e ɪ p ˈ iː ˈ a ɪ z
+ASR || ˈ e ɪ ˈ ɛ s ˈ ɑː ɹ
+ASYNCHRONOUS || e ɪ s ˈ ɪ ŋ k ɹ ə n ə s
+ATTENTION || ə t ˈ ɛ n ʃ ə n
+Aiops || ˈ e ɪ ˈ a ɪ ˌ ɑː p s
+Alembic || ə l ˈ ɛ m b ɪ k
+Angular || ˈ æ ŋ ɡ j ə l ɚ
+Api || ˈ e ɪ p ˈ iː ˈ a ɪ
+Apis || ˈ e ɪ p ˈ iː ˈ a ɪ z
+Asr || ˈ e ɪ ˈ ɛ s ˈ ɑː ɹ
+Asynchronous || e ɪ s ˈ ɪ ŋ k ɹ ə n ə s
+Attention || ə t ˈ ɛ n ʃ ə n
+BACKEND || b ˈ æ k ˌ ɛ n d
+BACKPROPAGATION || b ˈ æ k p ɹ ˌ ɑː p ə ɡ ˈ e ɪ ʃ ə n
+BCRYPT || b ˈ iː k ɹ ɪ p t
+BENCHMARK || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k
+BENCHMARKED || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k t
+BENCHMARKING || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k ɪ ŋ
+BENCHMARKS || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k s
+BF16 || b ˈ iː ˈ ɛ f s ˌ ɪ k s t ˈ iː n
+BITRATE || b ˈ ɪ t ɹ ˌ e ɪ t
+BPE || b ˈ iː p ˈ iː ˈ iː
+Backend || b ˈ æ k ˌ ɛ n d
+Backpropagation || b ˈ æ k p ɹ ˌ ɑː p ə ɡ ˈ e ɪ ʃ ə n
+Bcrypt || b ˈ iː k ɹ ɪ p t
+Benchmark || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k
+Benchmarked || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k t
+Benchmarking || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k ɪ ŋ
+Benchmarks || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k s
+Bf16 || b ˈ iː ˈ ɛ f s ˌ ɪ k s t ˈ iː n
+Bitrate || b ˈ ɪ t ɹ ˌ e ɪ t
+Bpe || b ˈ iː p ˈ iː ˈ iː
+CADDY || k ˈ æ d i
+CER || s ˈ ɜː
+CHECKPOINT || t ʃ ˈ ɛ k p ˌ ɔɪ n t
+CHECKPOINTS || t ʃ ˈ ɛ k p ˌ ɔɪ n t s
+CODEC || k ˈ o ʊ d ˌ ɛ k
+CODECS || k ˈ o ʊ d ˌ ɛ k s
+CONCURRENCY || k ə n k ˈ ɜː ɹ ə n s i
+CORS || k ˈ ɔː ɹ z
+CPU || s ˈ iː p ˈ iː j ˈ uː
+CPUS || s ˈ iː p ˈ iː j ˈ uː z
+CPUs || s ˈ iː p ˈ iː j ˈ uː z
+CSRF || s ˈ iː ˈ ɛ s ˈ ɑː ɹ ˈ ɛ f
+CSS3 || s ˈ iː ˈ ɛ s ˈ ɛ s θ ɹ ˈ iː
+CTRANSLATE || s ˈ iː t ɹ æ n s l ˈ e ɪ t
+CUDA || k ˈ uː d ə
+CURL || k ˈ ɜː l
+Caddy || k ˈ æ d i
+Cer || s ˈ ɜː
+Checkpoint || t ʃ ˈ ɛ k p ˌ ɔɪ n t
+Checkpoints || t ʃ ˈ ɛ k p ˌ ɔɪ n t s
+Codec || k ˈ o ʊ d ˌ ɛ k
+Codecs || k ˈ o ʊ d ˌ ɛ k s
+Concurrency || k ə n k ˈ ɜː ɹ ə n s i
+Cors || k ˈ ɔː ɹ z
+Cpu || s ˈ iː p ˈ iː j ˈ uː
+Cpus || s ˈ iː p ˈ iː j ˈ uː z
+Csrf || s ˈ iː ˈ ɛ s ˈ ɑː ɹ ˈ ɛ f
+Css3 || s ˈ iː ˈ ɛ s ˈ ɛ s θ ɹ ˈ iː
+Ctranslate || s ˈ iː t ɹ æ n s l ˈ e ɪ t
+Cuda || k ˈ uː d ə
+Curl || k ˈ ɜː l
+DATASET || d ˈ e ɪ t ə s ˌ ɛ t
+DATASETS || d ˈ e ɪ t ə s ˌ ɛ t s
+DBFS || d ˈ iː b ˈ iː ˈ ɛ f ˈ ɛ s
+DECIBEL || dˈ ɛ s ɪ bˌ ɛ l
+DECIBELS || dˈ ɛ s ɪ bˌ ɛ l z
+DEVOPS || d ˈ ɛ v ˌ ɑː p s
+DEVSERVER || d ˈ ɛ v s ˌ ɜː v ɚ
+DIFFUSION || d ɪ f j ˈ uː ʒ ə n
+DOCKER || d ˈ ɑː k ɚ
+DOCKER'S || d ˈ ɑː k ɚ z
+Dataset || d ˈ e ɪ t ə s ˌ ɛ t
+Datasets || d ˈ e ɪ t ə s ˌ ɛ t s
+Dbfs || d ˈ iː b ˈ iː ˈ ɛ f ˈ ɛ s
+Decibel || dˈ ɛ s ɪ bˌ ɛ l
+Decibels || dˈ ɛ s ɪ bˌ ɛ l z
+Devops || d ˈ ɛ v ˌ ɑː p s
+Devserver || d ˈ ɛ v s ˌ ɜː v ɚ
+Diffusion || d ɪ f j ˈ uː ʒ ə n
+Docker || d ˈ ɑː k ɚ
+Docker's || d ˈ ɑː k ɚ z
+ESBUILD || ˈ iː ˈ ɛ s b ˌ ɪ l d
+Esbuild || ˈ iː ˈ ɛ s b ˌ ɪ l d
+F5 || ˈ ɛ f f ˈ a ɪ v
+FAILOVER || f ˈ e ɪ l ˌ o ʊ v ɚ
+FASTAPI || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ
+FASTAPI'S || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ z
+FAULT-TOLERANT || f ˈ ɔː l t t ˈ ɑː l ɚ ə n t
+FFMPEG || ˈ ɛ f ˈ ɛ f ˈ ɛ m p ˌ ɛ ɡ
+FFPROBE || ˈ ɛ f ˈ ɛ f p ɹ ˈ o ʊ b
+FLAC || f l ˈ æ k
+FP16 || ˈ ɛ f p ˈ iː s ˌ ɪ k s t ˈ iː n
+FP32 || ˈ ɛ f p ˈ iː θ ˈ ɜː ɾ i t ˈ uː
+FRONTEND || f ɹ ˈ ʌ n t ˌ ɛ n d
+FSA || ˈ ɛ f ˈ ɛ s ˈ e ɪ
+FULLSTACK || f ˈ ʊ l s t ˌ æ k
+Failover || f ˈ e ɪ l ˌ o ʊ v ɚ
+FastAPI || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ
+Fastapi || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ
+Fastapi's || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ z
+Fault-tolerant || f ˈ ɔː l t t ˈ ɑː l ɚ ə n t
+Ffmpeg || ˈ ɛ f ˈ ɛ f ˈ ɛ m p ˌ ɛ ɡ
+Ffprobe || ˈ ɛ f ˈ ɛ f p ɹ ˈ o ʊ b
+Flac || f l ˈ æ k
+Fp16 || ˈ ɛ f p ˈ iː s ˌ ɪ k s t ˈ iː n
+Fp32 || ˈ ɛ f p ˈ iː θ ˈ ɜː ɾ i t ˈ uː
+Frontend || f ɹ ˈ ʌ n t ˌ ɛ n d
+Fsa || ˈ ɛ f ˈ ɛ s ˈ e ɪ
+Fullstack || f ˈ ʊ l s t ˌ æ k
+G2P || d ʒ ˈ iː t ˈ uː p ˈ iː
+G2p || d ʒ ˈ iː t ˈ uː p ˈ iː
+GIGABYTE || ɡ ˈ ɪ ɡ ə b ˌ a ɪ t
+GIGABYTES || ɡˈ ɪ ɡ ə bˌ aɪ t s
+GIGAHERTZ || ɡˈ ɪ ɡ ə hˈ ɜː t s
+GIT || ɡ ˈ ɪ t
+GITHUB || ɡ ˈ ɪ t h ʌ b
+GITHUB'S || ɡ ˈ ɪ t h ʌ b z
+GPU || d ʒ ˈ iː p ˈ iː j ˈ uː
+GPUS || d ʒ ˈ iː p ˈ iː j ˈ uː z
+GPUs || d ʒ ˈ iː p ˈ iː j ˈ uː z
+GRAFANA || ɡ ɹ ə f ˈ ɑː n ə
+GRPC || d ʒ ˈ iː ˈ ɑː ɹ p ˈ iː s ˈ iː
+Gigabyte || ɡ ˈ ɪ ɡ ə b ˌ a ɪ t
+Gigabytes || ɡˈ ɪ ɡ ə bˌ aɪ t s
+Gigahertz || ɡˈ ɪ ɡ ə hˈ ɜː t s
+Git || ɡ ˈ ɪ t
+Github || ɡ ˈ ɪ t h ʌ b
+Github's || ɡ ˈ ɪ t h ʌ b z
+Gpu || d ʒ ˈ iː p ˈ iː j ˈ uː
+Gpus || d ʒ ˈ iː p ˈ iː j ˈ uː z
+Grafana || ɡ ɹ ə f ˈ ɑː n ə
+Grpc || d ʒ ˈ iː ˈ ɑː ɹ p ˈ iː s ˈ iː
+HERTZ || hˈ ɜː t s
+HIGH-AVAILABILITY || h ˈ a ɪ ə v ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+HTML5 || ˈ e ɪ t ʃ t ˈ iː ˈ ɛ m ˈ ɛ l f ˈ a ɪ v
+HTTP || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː
+HTTPS || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː ˈ ɛ s
+HUGGINGFACE || h ˈ ʌ ɡ ɪ ŋ f ˌ e ɪ s
+Hertz || hˈ ɜː t s
+High-availability || h ˈ a ɪ ə v ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+Html5 || ˈ e ɪ t ʃ t ˈ iː ˈ ɛ m ˈ ɛ l f ˈ a ɪ v
+Http || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː
+Https || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː ˈ ɛ s
+Huggingface || h ˈ ʌ ɡ ɪ ŋ f ˌ e ɪ s
+IDEMPOTENCY || a ɪ d ˈ ɛ m p o ʊ t n̩ s i
+IDEMPOTENT || a ɪ d ˈ ɛ m p o ʊ t n̩ t
+INDIC || ˈ ɪ n d ɪ k
+INFERENCE || ˈ ɪ n f ɚ ə n s
+INT4 || ˈ ɪ n t f ˈ ɔː ɹ
+INT8 || ˈ ɪ n t ˈ e ɪ t
+INTELLIGIBILITY || ɪ n t ˌ ɛ l ɪ d ʒ ə b ˈ ɪ l ᵻ ɾ i
+IPA || ˈ a ɪ p ˈ iː ˈ e ɪ
+Idempotency || a ɪ d ˈ ɛ m p o ʊ t n̩ s i
+Idempotent || a ɪ d ˈ ɛ m p o ʊ t n̩ t
+Indic || ˈ ɪ n d ɪ k
+Inference || ˈ ɪ n f ɚ ə n s
+Int4 || ˈ ɪ n t f ˈ ɔː ɹ
+Int8 || ˈ ɪ n t ˈ e ɪ t
+Intelligibility || ɪ n t ˌ ɛ l ɪ d ʒ ə b ˈ ɪ l ᵻ ɾ i
+Ipa || ˈ a ɪ p ˈ iː ˈ e ɪ
+JAEGER || j ˈ e ɪ ɡ ɚ
+JAVASCRIPT || d ʒ ˈ ɑː v ə s k ɹ ˌ ɪ p t
+JSON || d ʒ ˈ e ɪ s ɑː n
+JWT || d ʒ ˈ e ɪ d ˈ ʌ b ə l j ˈ uː t ˈ iː
+Jaeger || j ˈ e ɪ ɡ ɚ
+Javascript || d ʒ ˈ ɑː v ə s k ɹ ˌ ɪ p t
+Json || d ʒ ˈ e ɪ s ɑː n
+Jwt || d ʒ ˈ e ɪ d ˈ ʌ b ə l j ˈ uː t ˈ iː
+K2 || k ˈ e ɪ t ˈ uː
+KILOBYTE || k ˈ ɪ l ə b ˌ a ɪ t
+KILOBYTES || kˈ ɪ l ə bˌ aɪ t s
+KILOHERTZ || kˈ ɪ l ə hˈ ɜː t s
+KUBERNETES || k ˌ uː b ɚ n ˈ ɛ t iː z
+Kilobyte || k ˈ ɪ l ə b ˌ a ɪ t
+Kilobytes || kˈ ɪ l ə bˌ aɪ t s
+Kilohertz || kˈ ɪ l ə hˈ ɜː t s
+Kubernetes || k ˌ uː b ɚ n ˈ ɛ t iː z
+LATENCY || l ˈ e ɪ t n̩ s i
+LFS || ˈ ɛ l ˈ ɛ f ˈ ɛ s
+LINUX || l ˈ ɪ n ə k s
+LLM || ˈ ɛ l ˈ ɛ l ˈ ɛ m
+LLMS || ˈ ɛ l ˈ ɛ l ˈ ɛ m z
+LLMs || ˈ ɛ l ˈ ɛ l ˈ ɛ m z
+LOAD-BALANCER || l ˈ o ʊ d b ˌ æ l ə n s ɚ
+LOAD-BALANCING || l ˈ o ʊ d b ˌ æ l ə n s ɪ ŋ
+LOSSLESS || l ˈ ɔː s l ə s
+LOSSY || l ˈ ɔː s i
+Latency || l ˈ e ɪ t n̩ s i
+Lfs || ˈ ɛ l ˈ ɛ f ˈ ɛ s
+Linux || l ˈ ɪ n ə k s
+Llm || ˈ ɛ l ˈ ɛ l ˈ ɛ m
+Llms || ˈ ɛ l ˈ ɛ l ˈ ɛ m z
+Load-balancer || l ˈ o ʊ d b ˌ æ l ə n s ɚ
+Load-balancing || l ˈ o ʊ d b ˌ æ l ə n s ɪ ŋ
+Lossless || l ˈ ɔː s l ə s
+Lossy || l ˈ ɔː s i
+MEGABYTE || m ˈ ɛ ɡ ə b ˌ a ɪ t
+MEGABYTES || mˈ ɛ ɡ ə bˌ aɪ t s
+MEGAHERTZ || mˈ ɛ ɡ ə hˈ ɜː t s
+MICROKERNEL || m ˈ a ɪ k ɹ o ʊ k ˌ ɜː n l
+MICROSECOND || m ˈ a ɪ k ɹ o ʊ s ˌ ɛ k ə n d
+MICROSECONDS || mˈ aɪ k ɹ oʊ sˌ ɛ k ə n d z
+MICROSERVICE || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s
+MICROSERVICES || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s ɪ z
+MIDDLEWARE || m ˈ ɪ d l w ˌ ɛ ɹ
+MILLISECOND || mˈ ɪ l ɪ sˌ ɛ k ə n d
+MILLISECONDS || mˈ ɪ l ɪ sˌ ɛ k ə n d z
+MLOPS || ˈ ɛ m ˈ ɛ l ˌ ɑː p s
+MONO || m ˈ ɑː n o ʊ
+MONOLITH || m ˈ ɑː n ə l ˌ ɪ θ
+MONOLITHIC || m ˌ ɑː n ə l ˈ ɪ θ ɪ k
+MOS || m ˈ ɑː s
+MP3 || ˈ ɛ m p ˈ iː θ ɹ ˈ iː
+MULTITENANCY || m ˌ ʌ l t i t ˈ ɛ n ə n s i
+Megabyte || m ˈ ɛ ɡ ə b ˌ a ɪ t
+Megabytes || mˈ ɛ ɡ ə bˌ aɪ t s
+Megahertz || mˈ ɛ ɡ ə hˈ ɜː t s
+Microkernel || m ˈ a ɪ k ɹ o ʊ k ˌ ɜː n l
+Microsecond || m ˈ a ɪ k ɹ o ʊ s ˌ ɛ k ə n d
+Microseconds || mˈ aɪ k ɹ oʊ sˌ ɛ k ə n d z
+Microservice || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s
+Microservices || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s ɪ z
+Middleware || m ˈ ɪ d l w ˌ ɛ ɹ
+Millisecond || mˈ ɪ l ɪ sˌ ɛ k ə n d
+Milliseconds || mˈ ɪ l ɪ sˌ ɛ k ə n d z
+Mlops || ˈ ɛ m ˈ ɛ l ˌ ɑː p s
+Mono || m ˈ ɑː n o ʊ
+Monolith || m ˈ ɑː n ə l ˌ ɪ θ
+Monolithic || m ˌ ɑː n ə l ˈ ɪ θ ɪ k
+Mos || m ˈ ɑː s
+Mp3 || ˈ ɛ m p ˈ iː θ ɹ ˈ iː
+Multitenancy || m ˌ ʌ l t i t ˈ ɛ n ə n s i
+NANOSECONDS || nˈ æ n oʊ sˌ ɛ k ə n d z
+NEXTJS || n ˈ ɛ k s t d ʒ ˈ e ɪ ˈ ɛ s
+NGINX || ˈ ɛ n d ʒ ɪ n ˈ ɛ k s
+NOSQL || n ˈ o ʊ ˈ ɛ s k j ˈ uː ˈ ɛ l
+NPM || ˈ ɛ n p ˈ iː ˈ ɛ m
+NUMPY || n ˈ ʌ m p ˌ a ɪ
+Nanoseconds || nˈ æ n oʊ sˌ ɛ k ə n d z
+Nextjs || n ˈ ɛ k s t d ʒ ˈ e ɪ ˈ ɛ s
+Nginx || ˈ ɛ n d ʒ ɪ n ˈ ɛ k s
+Nosql || n ˈ o ʊ ˈ ɛ s k j ˈ uː ˈ ɛ l
+Npm || ˈ ɛ n p ˈ iː ˈ ɛ m
+NumPy || n ˈ ʌ m p ˌ a ɪ
+Numpy || n ˈ ʌ m p ˌ a ɪ
+OBSERVABILITY || ə b z ˌ ɜː v ə b ˈ ɪ l ᵻ ɾ i
+OGG || ˈ ɑː ɡ
+ONNX || ˈ ɑː n ɪ k s
+ONNXRUNTIME || ˈ ɑː n ɪ k s ɹ ˈ ʌ n t ˌ a ɪ m
+OOV || ˌ o ʊ ˌ o ʊ v ˈ iː
+OPENTELEMETRY || ˈ o ʊ p ə n t ə l ˈ ɛ m ə t ɹ i
+OPUS || ˈ o ʊ p ə s
+Observability || ə b z ˌ ɜː v ə b ˈ ɪ l ᵻ ɾ i
+Ogg || ˈ ɑː ɡ
+Onnx || ˈ ɑː n ɪ k s
+Onnxruntime || ˈ ɑː n ɪ k s ɹ ˈ ʌ n t ˌ a ɪ m
+Oov || ˌ o ʊ ˌ o ʊ v ˈ iː
+Opentelemetry || ˈ o ʊ p ə n t ə l ˈ ɛ m ə t ɹ i
+Opus || ˈ o ʊ p ə s
+PCM || p ˈ iː s ˈ iː ˈ ɛ m
+PESQ || p ˈ ɛ s k
+PETABYTES || pˈ ɛ t ə bˌ aɪ t s
+PIP || p ˈ ɪ p
+PNPM || p ˈ iː ˈ ɛ n p ˈ iː ˈ ɛ m
+POSTGRES || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s
+POSTGRESQL || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l
+POSTGRESQL'S || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l z
+POSTMAN || p ˈ o ʊ s t m ˌ æ n
+PROMETHEUS || p ɹ ə m ˈ iː θ i ə s
+PYBIND || p ˈ a ɪ b ˌ a ɪ n d
+PYTEST || p ˈ a ɪ t ˈ ɛ s t
+PYTHON'S || p ˈ a ɪ θ ɑː n z
+PYTORCH || p ˈ a ɪ t ˈ ɔː ɹ t ʃ
+Pcm || p ˈ iː s ˈ iː ˈ ɛ m
+Pesq || p ˈ ɛ s k
+Petabytes || pˈ ɛ t ə bˌ aɪ t s
+Pip || p ˈ ɪ p
+Pnpm || p ˈ iː ˈ ɛ n p ˈ iː ˈ ɛ m
+PostgreSQL || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l
+Postgres || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s
+Postgresql || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l
+Postgresql's || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l z
+Postman || p ˈ o ʊ s t m ˌ æ n
+Prometheus || p ɹ ə m ˈ iː θ i ə s
+PyTorch || p ˈ a ɪ t ˈ ɔː ɹ t ʃ
+Pybind || p ˈ a ɪ b ˌ a ɪ n d
+Pytest || p ˈ a ɪ t ˈ ɛ s t
+Python's || p ˈ a ɪ θ ɑː n z
+Pytorch || p ˈ a ɪ t ˈ ɔː ɹ t ʃ
+QUANTIZATION || k w ˌ ɑː n t ɪ z ˈ e ɪ ʃ ə n
+QUANTIZED || k w ˈ ɑː n t ɪ z d
+Quantization || k w ˌ ɑː n t ɪ z ˈ e ɪ ʃ ə n
+Quantized || k w ˈ ɑː n t ɪ z d
+RADIX || ɹ ˈ e ɪ d ɪ k s
+REACT || ɹ i ˈ æ k t
+REDIS || ɹ ˈ ɛ d ɪ s
+REFACTOR || ɹ iː f ˈ æ k t ɚ
+REFACTORED || ɹ iː f ˈ æ k t ɚ d
+REFACTORING || ɹ iː f ˈ æ k t ɚ ɪ ŋ
+RESAMPLE || ɹ iː s ˈ æ m p l
+RESAMPLED || ɹ iː s ˈ æ m p l d
+RESAMPLING || ɹ iː s ˈ æ m p l ɪ ŋ
+RESILIENCE || ɹ ᵻ z ˈ ɪ l i ə n s
+REVERSE-PROXY || ɹ ᵻ v ˈ ɜː s p ɹ ˈ ɑː k s i
+RTF || ˈ ɑː ɹ t ˈ iː ˈ ɛ f
+Radix || ɹ ˈ e ɪ d ɪ k s
+React || ɹ i ˈ æ k t
+Redis || ɹ ˈ ɛ d ɪ s
+Refactor || ɹ iː f ˈ æ k t ɚ
+Refactored || ɹ iː f ˈ æ k t ɚ d
+Refactoring || ɹ iː f ˈ æ k t ɚ ɪ ŋ
+Resample || ɹ iː s ˈ æ m p l
+Resampled || ɹ iː s ˈ æ m p l d
+Resampling || ɹ iː s ˈ æ m p l ɪ ŋ
+Resilience || ɹ ᵻ z ˈ ɪ l i ə n s
+Reverse-proxy || ɹ ᵻ v ˈ ɜː s p ɹ ˈ ɑː k s i
+Rtf || ˈ ɑː ɹ t ˈ iː ˈ ɛ f
+SAFETENSORS || s ˈ e ɪ f t ˌ ɛ n s ɚ z
+SCALABILITY || s k ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+SCIPY || s ˈ a ɪ p ˌ a ɪ
+SHERPA || ʃ ˈ ɜː p ə
+SILERO || s ɪ l ˈ ɛ ɹ o ʊ
+SNR || ˈ ɛ s ˈ ɛ n ˈ ɑː ɹ
+SPECTROGRAM || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m
+SPECTROGRAMS || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m z
+SQL || ˈ ɛ s k j ˈ uː ˈ ɛ l
+STEREO || s t ˈ ɛ ɹ i ˌ o ʊ
+STOI || s t ˈ ɔɪ
+SVELTE || s v ˈ ɛ l t
+SWC || ˈ ɛ s d ˈ ʌ b ə l j ˈ uː s ˈ iː
+SYNCHRONOUS || s ˈ ɪ ŋ k ɹ ə n ə s
+SYSADMIN || s ˈ ɪ s æ d m ˌ ɪ n
+Safetensors || s ˈ e ɪ f t ˌ ɛ n s ɚ z
+Scalability || s k ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+SciPy || s ˈ a ɪ p ˌ a ɪ
+Scipy || s ˈ a ɪ p ˌ a ɪ
+Sherpa || ʃ ˈ ɜː p ə
+Silero || s ɪ l ˈ ɛ ɹ o ʊ
+Snr || ˈ ɛ s ˈ ɛ n ˈ ɑː ɹ
+Spectrogram || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m
+Spectrograms || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m z
+Sql || ˈ ɛ s k j ˈ uː ˈ ɛ l
+Stereo || s t ˈ ɛ ɹ i ˌ o ʊ
+Stoi || s t ˈ ɔɪ
+Svelte || s v ˈ ɛ l t
+Swc || ˈ ɛ s d ˈ ʌ b ə l j ˈ uː s ˈ iː
+Synchronous || s ˈ ɪ ŋ k ɹ ə n ə s
+Sysadmin || s ˈ ɪ s æ d m ˌ ɪ n
+TAILWIND || t ˈ e ɪ l w ˌ ɪ n d
+TELEMETRY || t ə l ˈ ɛ m ə t ɹ i
+TERABYTES || tˈ ɛ ɹ ə bˌ aɪ t s
+TERAHERTZ || tˈ ɛ ɹ ə hˈ ɜː t s
+THROUGHPUT || θ ɹ ˈ uː p ˌ ʊ t
+TORCHAUDIO || t ˈ ɔː ɹ t ʃ ˈ ɔː d i ˌ o ʊ
+TORCHVISION || t ˈ ɔː ɹ t ʃ v ˈ ɪ ʒ ə n
+TRANSFORMER || t ɹ æ n s f ˈ ɔː ɹ m ɚ
+TRANSFORMERS || t ɹ æ n s f ˈ ɔː ɹ m ɚ z
+TRANSPILE || t ɹ æ n s p ˈ a ɪ l
+TRANSPILED || t ɹ æ n s p ˈ a ɪ l d
+TRANSPILER || t ɹ æ n s p ˈ a ɪ l ɚ
+TTS || t ˈ iː t ˈ iː ˈ ɛ s
+TYPESCRIPT || t ˈ a ɪ p s k ɹ ˌ ɪ p t
+Tailwind || t ˈ e ɪ l w ˌ ɪ n d
+Telemetry || t ə l ˈ ɛ m ə t ɹ i
+Terabytes || tˈ ɛ ɹ ə bˌ aɪ t s
+Terahertz || tˈ ɛ ɹ ə hˈ ɜː t s
+Throughput || θ ɹ ˈ uː p ˌ ʊ t
+Torchaudio || t ˈ ɔː ɹ t ʃ ˈ ɔː d i ˌ o ʊ
+Torchvision || t ˈ ɔː ɹ t ʃ v ˈ ɪ ʒ ə n
+Transformer || t ɹ æ n s f ˈ ɔː ɹ m ɚ
+Transformers || t ɹ æ n s f ˈ ɔː ɹ m ɚ z
+Transpile || t ɹ æ n s p ˈ a ɪ l
+Transpiled || t ɹ æ n s p ˈ a ɪ l d
+Transpiler || t ɹ æ n s p ˈ a ɪ l ɚ
+Tts || t ˈ iː t ˈ iː ˈ ɛ s
+Typescript || t ˈ a ɪ p s k ɹ ˌ ɪ p t
+UUID || j ˈ uː j ˈ uː ˈ a ɪ d ˈ iː
+UVICORN || j ˈ uː v ɪ k ˌ ɔː ɹ n
+Uuid || j ˈ uː j ˈ uː ˈ a ɪ d ˈ iː
+Uvicorn || j ˈ uː v ɪ k ˌ ɔː ɹ n
+VAD || v ˈ æ d
+VITE || v ˈ iː t
+VITEST || v ˈ iː t ˈ ɛ s t
+VOCODER || v ˈ o ʊ k ˈ o ʊ d ɚ
+VOCODERS || v ˈ o ʊ k ˈ o ʊ d ɚ z
+VOCOS || v ˈ o ʊ k o ʊ s
+VRAM || v ˈ iː ɹ ˌ æ m
+VUE || v j ˈ uː
+Vad || v ˈ æ d
+Vite || v ˈ iː t
+Vitest || v ˈ iː t ˈ ɛ s t
+VoCOS || v ˈ o ʊ k o ʊ s
+Vocoder || v ˈ o ʊ k ˈ o ʊ d ɚ
+Vocoders || v ˈ o ʊ k ˈ o ʊ d ɚ z
+Vocos || v ˈ o ʊ k o ʊ s
+Vram || v ˈ iː ɹ ˌ æ m
+Vue || v j ˈ uː
+WASM || w ˈ æ z ə m
+WAV || w ˈ æ v
+WEBPACK || w ˈ ɛ b p ˌ æ k
+WEBRTC || w ˈ ɛ b ˈ ɑː ɹ t ˈ iː s ˈ iː
+WEBSOCKET || w ˈ ɛ b s ˈ ɑː k ᵻ t
+WEBSOCKETS || w ˈ ɛ b s ˈ ɑː k ᵻ t s
+WER || w ˈ ɜː
+WHISPER || w ˈ ɪ s p ɚ
+Wasm || w ˈ æ z ə m
+Wav || w ˈ æ v
+WebSocket || w ˈ ɛ b s ˈ ɑː k ᵻ t
+WebSockets || w ˈ ɛ b s ˈ ɑː k ᵻ t s
+Webpack || w ˈ ɛ b p ˌ æ k
+Webrtc || w ˈ ɛ b ˈ ɑː ɹ t ˈ iː s ˈ iː
+Websocket || w ˈ ɛ b s ˈ ɑː k ᵻ t
+Websockets || w ˈ ɛ b s ˈ ɑː k ᵻ t s
+Wer || w ˈ ɜː
+Whisper || w ˈ ɪ s p ɚ
+YAML || j ˈ æ m l
+Yaml || j ˈ æ m l
+ZUSTAND || t s ˈ uː ʃ t ˌ æ n t
+Zustand || t s ˈ uː ʃ t ˌ æ n t
+aiops || ˈ e ɪ ˈ a ɪ ˌ ɑː p s
+alembic || ə l ˈ ɛ m b ɪ k
+angular || ˈ æ ŋ ɡ j ə l ɚ
+api || ˈ e ɪ p ˈ iː ˈ a ɪ
+apis || ˈ e ɪ p ˈ iː ˈ a ɪ z
+asr || ˈ e ɪ ˈ ɛ s ˈ ɑː ɹ
+asynchronous || e ɪ s ˈ ɪ ŋ k ɹ ə n ə s
+attention || ə t ˈ ɛ n ʃ ə n
+backend || b ˈ æ k ˌ ɛ n d
+backpropagation || b ˈ æ k p ɹ ˌ ɑː p ə ɡ ˈ e ɪ ʃ ə n
+bcrypt || b ˈ iː k ɹ ɪ p t
+benchmark || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k
+benchmarked || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k t
+benchmarking || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k ɪ ŋ
+benchmarks || b ˈ ɛ n t ʃ m ˌ ɑː ɹ k s
+bf16 || b ˈ iː ˈ ɛ f s ˌ ɪ k s t ˈ iː n
+bitrate || b ˈ ɪ t ɹ ˌ e ɪ t
+bpe || b ˈ iː p ˈ iː ˈ iː
+caddy || k ˈ æ d i
+cer || s ˈ ɜː
+checkpoint || t ʃ ˈ ɛ k p ˌ ɔɪ n t
+checkpoints || t ʃ ˈ ɛ k p ˌ ɔɪ n t s
+codec || k ˈ o ʊ d ˌ ɛ k
+codecs || k ˈ o ʊ d ˌ ɛ k s
+concurrency || k ə n k ˈ ɜː ɹ ə n s i
+cors || k ˈ ɔː ɹ z
+cpu || s ˈ iː p ˈ iː j ˈ uː
+cpus || s ˈ iː p ˈ iː j ˈ uː z
+csrf || s ˈ iː ˈ ɛ s ˈ ɑː ɹ ˈ ɛ f
+css3 || s ˈ iː ˈ ɛ s ˈ ɛ s θ ɹ ˈ iː
+ctranslate || s ˈ iː t ɹ æ n s l ˈ e ɪ t
+cuda || k ˈ uː d ə
+curl || k ˈ ɜː l
+dBFS || d ˈ iː b ˈ iː ˈ ɛ f ˈ ɛ s
+dataset || d ˈ e ɪ t ə s ˌ ɛ t
+datasets || d ˈ e ɪ t ə s ˌ ɛ t s
+dbfs || d ˈ iː b ˈ iː ˈ ɛ f ˈ ɛ s
+decibel || dˈ ɛ s ɪ bˌ ɛ l
+decibels || dˈ ɛ s ɪ bˌ ɛ l z
+devops || d ˈ ɛ v ˌ ɑː p s
+devserver || d ˈ ɛ v s ˌ ɜː v ɚ
+diffusion || d ɪ f j ˈ uː ʒ ə n
+docker || d ˈ ɑː k ɚ
+docker's || d ˈ ɑː k ɚ z
+esbuild || ˈ iː ˈ ɛ s b ˌ ɪ l d
+f5 || ˈ ɛ f f ˈ a ɪ v
+failover || f ˈ e ɪ l ˌ o ʊ v ɚ
+fastapi || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ
+fastapi's || f ˈ æ s t ˈ e ɪ p ˈ iː ˈ a ɪ z
+fault-tolerant || f ˈ ɔː l t t ˈ ɑː l ɚ ə n t
+ffmpeg || ˈ ɛ f ˈ ɛ f ˈ ɛ m p ˌ ɛ ɡ
+ffprobe || ˈ ɛ f ˈ ɛ f p ɹ ˈ o ʊ b
+flac || f l ˈ æ k
+fp16 || ˈ ɛ f p ˈ iː s ˌ ɪ k s t ˈ iː n
+fp32 || ˈ ɛ f p ˈ iː θ ˈ ɜː ɾ i t ˈ uː
+frontend || f ɹ ˈ ʌ n t ˌ ɛ n d
+fsa || ˈ ɛ f ˈ ɛ s ˈ e ɪ
+fullstack || f ˈ ʊ l s t ˌ æ k
+g2p || d ʒ ˈ iː t ˈ uː p ˈ iː
+gigabyte || ɡ ˈ ɪ ɡ ə b ˌ a ɪ t
+gigabytes || ɡˈ ɪ ɡ ə bˌ aɪ t s
+gigahertz || ɡˈ ɪ ɡ ə hˈ ɜː t s
+git || ɡ ˈ ɪ t
+github || ɡ ˈ ɪ t h ʌ b
+github's || ɡ ˈ ɪ t h ʌ b z
+gpu || d ʒ ˈ iː p ˈ iː j ˈ uː
+gpus || d ʒ ˈ iː p ˈ iː j ˈ uː z
+grafana || ɡ ɹ ə f ˈ ɑː n ə
+grpc || d ʒ ˈ iː ˈ ɑː ɹ p ˈ iː s ˈ iː
+hertz || hˈ ɜː t s
+high-availability || h ˈ a ɪ ə v ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+html5 || ˈ e ɪ t ʃ t ˈ iː ˈ ɛ m ˈ ɛ l f ˈ a ɪ v
+http || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː
+https || ˈ e ɪ t ʃ t ˈ iː t ˈ iː p ˈ iː ˈ ɛ s
+huggingface || h ˈ ʌ ɡ ɪ ŋ f ˌ e ɪ s
+idempotency || a ɪ d ˈ ɛ m p o ʊ t n̩ s i
+idempotent || a ɪ d ˈ ɛ m p o ʊ t n̩ t
+indic || ˈ ɪ n d ɪ k
+inference || ˈ ɪ n f ɚ ə n s
+int4 || ˈ ɪ n t f ˈ ɔː ɹ
+int8 || ˈ ɪ n t ˈ e ɪ t
+intelligibility || ɪ n t ˌ ɛ l ɪ d ʒ ə b ˈ ɪ l ᵻ ɾ i
+ipa || ˈ a ɪ p ˈ iː ˈ e ɪ
+jaeger || j ˈ e ɪ ɡ ɚ
+javascript || d ʒ ˈ ɑː v ə s k ɹ ˌ ɪ p t
+json || d ʒ ˈ e ɪ s ɑː n
+jwt || d ʒ ˈ e ɪ d ˈ ʌ b ə l j ˈ uː t ˈ iː
+k2 || k ˈ e ɪ t ˈ uː
+kilobyte || k ˈ ɪ l ə b ˌ a ɪ t
+kilobytes || kˈ ɪ l ə bˌ aɪ t s
+kilohertz || kˈ ɪ l ə hˈ ɜː t s
+kubernetes || k ˌ uː b ɚ n ˈ ɛ t iː z
+latency || l ˈ e ɪ t n̩ s i
+lfs || ˈ ɛ l ˈ ɛ f ˈ ɛ s
+linux || l ˈ ɪ n ə k s
+llm || ˈ ɛ l ˈ ɛ l ˈ ɛ m
+llms || ˈ ɛ l ˈ ɛ l ˈ ɛ m z
+load-balancer || l ˈ o ʊ d b ˌ æ l ə n s ɚ
+load-balancing || l ˈ o ʊ d b ˌ æ l ə n s ɪ ŋ
+lossless || l ˈ ɔː s l ə s
+lossy || l ˈ ɔː s i
+megabyte || m ˈ ɛ ɡ ə b ˌ a ɪ t
+megabytes || mˈ ɛ ɡ ə bˌ aɪ t s
+megahertz || mˈ ɛ ɡ ə hˈ ɜː t s
+microkernel || m ˈ a ɪ k ɹ o ʊ k ˌ ɜː n l
+microsecond || m ˈ a ɪ k ɹ o ʊ s ˌ ɛ k ə n d
+microseconds || mˈ aɪ k ɹ oʊ sˌ ɛ k ə n d z
+microservice || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s
+microservices || m ˈ a ɪ k ɹ o ʊ s ˌ ɜː v ᵻ s ɪ z
+middleware || m ˈ ɪ d l w ˌ ɛ ɹ
+millisecond || mˈ ɪ l ɪ sˌ ɛ k ə n d
+milliseconds || mˈ ɪ l ɪ sˌ ɛ k ə n d z
+mlops || ˈ ɛ m ˈ ɛ l ˌ ɑː p s
+mono || m ˈ ɑː n o ʊ
+monolith || m ˈ ɑː n ə l ˌ ɪ θ
+monolithic || m ˌ ɑː n ə l ˈ ɪ θ ɪ k
+mos || m ˈ ɑː s
+mp3 || ˈ ɛ m p ˈ iː θ ɹ ˈ iː
+multitenancy || m ˌ ʌ l t i t ˈ ɛ n ə n s i
+nanoseconds || nˈ æ n oʊ sˌ ɛ k ə n d z
+nextjs || n ˈ ɛ k s t d ʒ ˈ e ɪ ˈ ɛ s
+nginx || ˈ ɛ n d ʒ ɪ n ˈ ɛ k s
+nosql || n ˈ o ʊ ˈ ɛ s k j ˈ uː ˈ ɛ l
+npm || ˈ ɛ n p ˈ iː ˈ ɛ m
+numpy || n ˈ ʌ m p ˌ a ɪ
+observability || ə b z ˌ ɜː v ə b ˈ ɪ l ᵻ ɾ i
+ogg || ˈ ɑː ɡ
+onnx || ˈ ɑː n ɪ k s
+onnxruntime || ˈ ɑː n ɪ k s ɹ ˈ ʌ n t ˌ a ɪ m
+oov || ˌ o ʊ ˌ o ʊ v ˈ iː
+opentelemetry || ˈ o ʊ p ə n t ə l ˈ ɛ m ə t ɹ i
+opus || ˈ o ʊ p ə s
+pcm || p ˈ iː s ˈ iː ˈ ɛ m
+pesq || p ˈ ɛ s k
+petabytes || pˈ ɛ t ə bˌ aɪ t s
+pip || p ˈ ɪ p
+pnpm || p ˈ iː ˈ ɛ n p ˈ iː ˈ ɛ m
+postgres || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s
+postgresql || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l
+postgresql's || p ˈ o ʊ s t ɡ ɹ ˈ ɛ s k j ˈ uː ˈ ɛ l z
+postman || p ˈ o ʊ s t m ˌ æ n
+prometheus || p ɹ ə m ˈ iː θ i ə s
+pybind || p ˈ a ɪ b ˌ a ɪ n d
+pytest || p ˈ a ɪ t ˈ ɛ s t
+python's || p ˈ a ɪ θ ɑː n z
+pytorch || p ˈ a ɪ t ˈ ɔː ɹ t ʃ
+quantization || k w ˌ ɑː n t ɪ z ˈ e ɪ ʃ ə n
+quantized || k w ˈ ɑː n t ɪ z d
+radix || ɹ ˈ e ɪ d ɪ k s
+react || ɹ i ˈ æ k t
+redis || ɹ ˈ ɛ d ɪ s
+refactor || ɹ iː f ˈ æ k t ɚ
+refactored || ɹ iː f ˈ æ k t ɚ d
+refactoring || ɹ iː f ˈ æ k t ɚ ɪ ŋ
+resample || ɹ iː s ˈ æ m p l
+resampled || ɹ iː s ˈ æ m p l d
+resampling || ɹ iː s ˈ æ m p l ɪ ŋ
+resilience || ɹ ᵻ z ˈ ɪ l i ə n s
+reverse-proxy || ɹ ᵻ v ˈ ɜː s p ɹ ˈ ɑː k s i
+rtf || ˈ ɑː ɹ t ˈ iː ˈ ɛ f
+safetensors || s ˈ e ɪ f t ˌ ɛ n s ɚ z
+scalability || s k ˌ e ɪ l ə b ˈ ɪ l ᵻ ɾ i
+scipy || s ˈ a ɪ p ˌ a ɪ
+sherpa || ʃ ˈ ɜː p ə
+silero || s ɪ l ˈ ɛ ɹ o ʊ
+snr || ˈ ɛ s ˈ ɛ n ˈ ɑː ɹ
+spectrogram || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m
+spectrograms || s p ˈ ɛ k t ɹ ə ɡ ɹ ˌ æ m z
+sql || ˈ ɛ s k j ˈ uː ˈ ɛ l
+stereo || s t ˈ ɛ ɹ i ˌ o ʊ
+stoi || s t ˈ ɔɪ
+svelte || s v ˈ ɛ l t
+swc || ˈ ɛ s d ˈ ʌ b ə l j ˈ uː s ˈ iː
+synchronous || s ˈ ɪ ŋ k ɹ ə n ə s
+sysadmin || s ˈ ɪ s æ d m ˌ ɪ n
+tailwind || t ˈ e ɪ l w ˌ ɪ n d
+telemetry || t ə l ˈ ɛ m ə t ɹ i
+terabytes || tˈ ɛ ɹ ə bˌ aɪ t s
+terahertz || tˈ ɛ ɹ ə hˈ ɜː t s
+throughput || θ ɹ ˈ uː p ˌ ʊ t
+torchaudio || t ˈ ɔː ɹ t ʃ ˈ ɔː d i ˌ o ʊ
+torchvision || t ˈ ɔː ɹ t ʃ v ˈ ɪ ʒ ə n
+transformer || t ɹ æ n s f ˈ ɔː ɹ m ɚ
+transformers || t ɹ æ n s f ˈ ɔː ɹ m ɚ z
+transpile || t ɹ æ n s p ˈ a ɪ l
+transpiled || t ɹ æ n s p ˈ a ɪ l d
+transpiler || t ɹ æ n s p ˈ a ɪ l ɚ
+tts || t ˈ iː t ˈ iː ˈ ɛ s
+typescript || t ˈ a ɪ p s k ɹ ˌ ɪ p t
+uuid || j ˈ uː j ˈ uː ˈ a ɪ d ˈ iː
+uvicorn || j ˈ uː v ɪ k ˌ ɔː ɹ n
+vad || v ˈ æ d
+vite || v ˈ iː t
+vitest || v ˈ iː t ˈ ɛ s t
+vocoder || v ˈ o ʊ k ˈ o ʊ d ɚ
+vocoders || v ˈ o ʊ k ˈ o ʊ d ɚ z
+vocos || v ˈ o ʊ k o ʊ s
+vram || v ˈ iː ɹ ˌ æ m
+vue || v j ˈ uː
+wasm || w ˈ æ z ə m
+wav || w ˈ æ v
+webpack || w ˈ ɛ b p ˌ æ k
+webrtc || w ˈ ɛ b ˈ ɑː ɹ t ˈ iː s ˈ iː
+websocket || w ˈ ɛ b s ˈ ɑː k ᵻ t
+websockets || w ˈ ɛ b s ˈ ɑː k ᵻ t s
+wer || w ˈ ɜː
+whisper || w ˈ ɪ s p ɚ
+yaml || j ˈ æ m l
+zustand || t s ˈ uː ʃ t ˌ æ n t

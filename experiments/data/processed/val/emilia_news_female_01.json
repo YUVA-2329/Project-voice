@@ -1,0 +1,19 @@
+{
+  "id": "emilia_news_female_01",
+  "dataset": "ZipVoice Clean Baseline (Emilia)",
+  "license": "CC-BY-NC-4.0",
+  "speaker": "news_female",
+  "gender": "female",
+  "language": "zh",
+  "detected_language": "zh",
+  "split": "val",
+  "file": "experiments\\data\\processed\\val\\emilia_news_female_01.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 6.836,
+  "speech_seconds": 5.64,
+  "snr_db": 48.82,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "各位村民, 大家新年好! 近期, 湖北省武汉市等多个地区",
+  "asr_verified_transcript": "各位村民,大家新年好近期,湖北省武漢市等多個地區"
+}

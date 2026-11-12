@@ -1,0 +1,19 @@
+{
+  "id": "emilia_leijun_01",
+  "dataset": "ZipVoice Clean Baseline (Emilia)",
+  "license": "CC-BY-NC-4.0",
+  "speaker": "leijun",
+  "gender": "male",
+  "language": "zh",
+  "detected_language": "zh",
+  "split": "test",
+  "file": "experiments\\data\\processed\\test\\emilia_leijun_01.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 6.057,
+  "speech_seconds": 5.882,
+  "snr_db": 23.3,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "那还是36年前, 1987年. 我呢考上了武汉大学的计算机系.",
+  "asr_verified_transcript": "那还是36年前1987年我呢考上了武汉大学的计算机器"
+}

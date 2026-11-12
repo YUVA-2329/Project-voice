@@ -1,0 +1,22 @@
+{
+  "pipeline_version": "1.0.0",
+  "target_sample_rate": 24000,
+  "total_recordings_evaluated": 6,
+  "total_recordings_accepted": 6,
+  "total_recordings_rejected": 0,
+  "rejection_rate_percent": 0.0,
+  "total_audio_seconds": 42.06,
+  "total_audio_hours": 0.01168,
+  "average_duration_seconds": 7.01,
+  "unique_speakers": 3,
+  "languages": [
+    "en",
+    "zh"
+  ],
+  "splits": {
+    "train": 3,
+    "val": 2,
+    "test": 1
+  },
+  "average_snr_db": 35.58
+}

@@ -1,0 +1,19 @@
+{
+  "id": "emilia_news_female_02",
+  "dataset": "ZipVoice Clean Baseline (Emilia)",
+  "license": "CC-BY-NC-4.0",
+  "speaker": "news_female",
+  "gender": "female",
+  "language": "zh",
+  "detected_language": "zh",
+  "split": "val",
+  "file": "experiments\\data\\processed\\val\\emilia_news_female_02.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 8.836,
+  "speech_seconds": 8.072,
+  "snr_db": 37.63,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "本台消息, 中共中央国务院, 近日印发关于构建数据基础制度, 更好发挥数据要素作用的意见.",
+  "asr_verified_transcript": "本台消息 中共中央國務院接著印刷 關於構建 數據基礎制度更好發揮 數據要素作用的意見"
+}

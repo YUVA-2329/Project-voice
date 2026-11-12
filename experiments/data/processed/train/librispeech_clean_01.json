@@ -1,0 +1,19 @@
+{
+  "id": "librispeech_clean_01",
+  "dataset": "LibriSpeech test-clean (OpenSLR 12)",
+  "license": "CC-BY-4.0",
+  "speaker": "spk_1272",
+  "gender": "male",
+  "language": "en",
+  "detected_language": "en",
+  "split": "train",
+  "file": "experiments\\data\\processed\\train\\librispeech_clean_01.wav",
+  "sample_rate": 24000,
+  "duration_seconds": 10.435,
+  "speech_seconds": 9.882,
+  "snr_db": 35.36,
+  "peak_dbfs": -1.0,
+  "clipping_ratio": 0.0,
+  "ground_truth_transcript": "A MAN SAID TO THE UNIVERSE SIR I EXIST",
+  "asr_verified_transcript": "He hoped there would be stew for dinner, turnips and carrots and bruised potatoes and fat mutton pieces to be ladled out in thick, peppered flour-fatten sauce."
+}
