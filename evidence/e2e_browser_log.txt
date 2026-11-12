@@ -1,0 +1,17 @@
+[   1.0s] ✓ 1. open introduction and create an account (0.9s) — email=browser-mw9gvhtl@example.com
+[   1.8s] ✓ 2. sign out and log in (0.8s)
+[  14.8s] ✓ 3. record a voice with the (fake-device) microphone (13.0s)
+[  15.0s] ✓ 4. name the voice and confirm consent (0.1s) — create aria-disabled before consent=true
+[  19.4s] ✓ 5–6. create the voice clone and wait for real processing (4.4s) — We heard
+[  19.6s] ✓ 7. the voice appears in My Voices (0.2s)
+[  19.8s] ✓ 8–9. refresh the page — the voice persists (0.2s) — cards=1
+[  19.9s] ✓ 10. select the voice (0.1s)
+[  41.9s] ✓ 11–13. type a sentence, press Run and wait for real inference (22.0s) — waited 22.0s; last progress label="Synthesising"
+[  43.8s] ✓ 14. play the generated speech in the page (1.9s) — currentTime=1.80s duration=7.48s id=06af1f2b-3b2f-7d22-8000-4696fae0b90d
+[  43.9s] ✓ 15–16. download the audio and verify the WAV file (0.1s) — project-voice-06af1f2b-3b2f-7d22-8000-4696fae0b90d.wav 359434 bytes, 24000 Hz, 1ch, 7.48s
+[  65.7s] ✓ 17. generate a second sentence (21.8s)
+[  65.9s] ✓ 18. history lists both generations (0.2s) — download controls=2
+[  70.7s] ✓ 19. create a second authorised voice by upload (4.8s)
+[  70.9s] ✓ 20. both voices are listed separately (0.2s)
+[  71.0s] ✓ 21. delete the uploaded voice (0.2s)
+[  71.4s] ✓ 22. deletion persists after reload; recorded voice remains (0.4s) — history still lists generations of the remaining voice

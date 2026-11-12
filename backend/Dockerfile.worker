@@ -1,0 +1,73 @@
+# PROJECT VOICE — CPU worker image (RQ worker + AI engine, no GPU).
+#
+# Multi-stage: the heavy Python dependencies (CPU-only torch wheels, sherpa-onnx, librosa,
+# faster-whisper) are installed into a virtualenv in the builder and copied into a slim runtime.
+# syntax=docker/dockerfile:1.7
+
+ARG PYTHON_IMAGE=python:3.11.10-slim-bookworm
+ARG TORCH_INDEX_URL=https://download.pytorch.org/whl/cpu
+ARG TORCH_SPEC="torch>=2.2"
+
+# ------------------------------------------------------------------------------ builder
+FROM ${PYTHON_IMAGE} AS builder
+ARG TORCH_INDEX_URL
+ARG TORCH_SPEC
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential \
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m venv "$VIRTUAL_ENV" \
+    && pip install --upgrade pip wheel
+
+WORKDIR /src
+COPY pyproject.toml README.md ./
+COPY app ./app
+COPY alembic ./alembic
+COPY alembic.ini ./
+# CPU-only torch first so the `engine` extra does not drag the CUDA build in.
+RUN pip install --index-url "${TORCH_INDEX_URL}" "${TORCH_SPEC}" \
+    && pip install ".[engine]"
+
+# ------------------------------------------------------------------------------ runtime
+FROM ${PYTHON_IMAGE} AS runtime
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    OMP_NUM_THREADS=1 \
+    VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# ffmpeg/ffprobe decode and encode every file; libsndfile → soundfile; libgomp → onnxruntime/torch.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ffmpeg libsndfile1 libgomp1 tini \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --system --gid 10001 app \
+    && useradd --system --uid 10001 --gid app --home /app --shell /usr/sbin/nologin app
+
+WORKDIR /app
+COPY --from=builder /opt/venv /opt/venv
+COPY --chown=app:app pyproject.toml README.md alembic.ini ./
+COPY --chown=app:app app ./app
+COPY --chown=app:app alembic ./alembic
+RUN mkdir -p /data/storage /data/tmp /models && chown -R app:app /app /data /models
+
+ENV PV_STORAGE_LOCAL_DIR=/data/storage \
+    PV_TMP_DIR=/data/tmp \
+    PV_MODELS_DIR=/models \
+    PV_ENGINE_DEVICE=cpu
+
+USER app
+VOLUME ["/models", "/data"]
+
+# Liveness: the heartbeat thread refreshes pv:worker:<host>:<pid> in Redis every 30 s (TTL 90 s).
+HEALTHCHECK --interval=60s --timeout=10s --start-period=120s --retries=3 \
+    CMD python -c "import socket,sys,redis;from app.core.config import get_settings;r=redis.Redis.from_url(get_settings().REDIS_URL);sys.exit(0 if any(r.scan_iter('pv:worker:'+socket.gethostname()+':*')) else 1)"
+
+ENTRYPOINT ["tini", "--"]
+CMD ["python", "-m", "app.jobs.worker", "--queues", "voice,generation"]

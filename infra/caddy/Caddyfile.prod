@@ -1,0 +1,19 @@
+# PROJECT VOICE — Caddy reverse proxy, PRODUCTION (docker-compose.prod.yml).
+# Automatic HTTPS (Let's Encrypt / ZeroSSL) for {$DOMAIN}; :80 redirects to HTTPS automatically.
+# Required env: DOMAIN (public host name with DNS pointing at this machine), ACME_EMAIL.
+# Certificates persist in the caddy_data volume.
+
+{
+	email {$ACME_EMAIL}
+	admin off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+import snippets.caddy
+
+{$DOMAIN} {
+	import app_routes
+	header Strict-Transport-Security "max-age=31536000; includeSubDomains"
+}

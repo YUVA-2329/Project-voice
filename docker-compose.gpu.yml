@@ -1,0 +1,35 @@
+# PROJECT VOICE — GPU worker override (NVIDIA). Requires the NVIDIA Container Toolkit.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml -f docker-compose.gpu.yml up -d --build
+#
+# Only the worker changes: it is built from Dockerfile.worker.cuda (CUDA 12.4 runtime + cu124
+# torch wheels) and reserves one GPU. The API, frontend, Postgres, Redis and Caddy are
+# unchanged and may equally run on another host (see docs/DEPLOYMENT.md, split topology).
+#
+# Not verified in the authoring environment (no GPU, download.pytorch.org blocked).
+
+name: project-voice
+
+services:
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker.cuda
+    image: project-voice/worker-cuda:${PV_IMAGE_TAG:-dev}
+    environment:
+      PV_ENGINE_DEVICE: cuda
+      PV_ENGINE_ALLOW_CPU_FALLBACK: ${PV_ENGINE_ALLOW_CPU_FALLBACK:-true}
+      # With several GPUs run one worker per GPU: scale and pin with CUDA_VISIBLE_DEVICES.
+      NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
+    deploy:
+      resources:
+        limits:
+          memory: ${WORKER_MEMORY:-12g}
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # Larger start_period: CUDA init + first model load on a cold GPU.
+    healthcheck:
+      start_period: 180s

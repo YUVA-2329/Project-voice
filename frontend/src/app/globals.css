@@ -1,0 +1,264 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  /* Colours map 1:1 to the CSS variables so themes switch without rebuilding classes. */
+  --color-*: initial;
+  --color-bg: var(--pv-bg);
+  --color-surface: var(--pv-surface);
+  --color-surface-2: var(--pv-surface-2);
+  --color-border: var(--pv-border);
+  --color-border-strong: var(--pv-border-strong);
+  --color-ink: var(--pv-ink);
+  --color-ink-2: var(--pv-ink-2);
+  --color-ink-3: var(--pv-ink-3);
+  --color-ink-inverse: var(--pv-ink-inverse);
+  --color-accent: var(--pv-accent);
+  --color-accent-hover: var(--pv-accent-hover);
+  --color-accent-soft: var(--pv-accent-soft);
+  --color-on-accent: var(--pv-on-accent);
+  --color-success: var(--pv-success);
+  --color-warning: var(--pv-warning);
+  --color-danger: var(--pv-danger);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+
+  --text-micro: 12px;
+  --text-micro--line-height: 16px;
+  --text-micro--letter-spacing: 0.01em;
+  --text-small: 13px;
+  --text-small--line-height: 18px;
+  --text-body: 15px;
+  --text-body--line-height: 22.5px;
+  --text-button: 14px;
+  --text-button--line-height: 20px;
+  --text-h3: 20px;
+  --text-h3--line-height: 26px;
+  --text-h2: 28px;
+  --text-h2--line-height: 32px;
+  --text-h1: 40px;
+  --text-h1--line-height: 42px;
+  --text-display-sm: 56px;
+  --text-display-sm--line-height: 1.02;
+  --text-display-md: 64px;
+  --text-display-md--line-height: 1.02;
+  --text-display-lg: 80px;
+  --text-display-lg--line-height: 1;
+
+  /* Geometry */
+  --radius-xs: var(--pv-radius-xs);
+  --radius-sm: var(--pv-radius-sm);
+  --radius-md: var(--pv-radius-md);
+  --radius-lg: var(--pv-radius-lg);
+  --shadow-sm: var(--pv-shadow-sm);
+  --shadow-md: var(--pv-shadow-md);
+
+  /* Breakpoint at which the top-bar links collapse into bottom tabs (DESIGN.md §3). */
+  --breakpoint-nav: 45rem;
+
+  /* Motion */
+  --ease-pv: var(--pv-ease);
+  --duration-fast: var(--pv-dur-fast);
+  --duration-base: var(--pv-dur);
+  --duration-slow: var(--pv-dur-slow);
+}
+
+@layer base {
+  html {
+    background: var(--pv-bg);
+    color: var(--pv-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    background: var(--pv-bg);
+    color: var(--pv-ink);
+    min-height: 100dvh;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  * {
+    border-color: var(--pv-border);
+  }
+
+  ::selection {
+    background: var(--pv-accent-soft);
+    color: var(--pv-ink);
+  }
+
+  ::placeholder {
+    color: var(--pv-ink-3);
+    opacity: 1;
+  }
+
+  /* Focus rings: 2px accent, offset 2px, on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--pv-accent);
+    outline-offset: 2px;
+    border-radius: var(--pv-radius-xs);
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  input[type="range"] {
+    accent-color: var(--pv-accent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--pv-ink-3);
+  }
+
+  .display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+  }
+
+  .hairline-b {
+    border-bottom: 1px solid var(--pv-border);
+  }
+
+  .hairline-t {
+    border-top: 1px solid var(--pv-border);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Live bars (brand mark) — pulse only while recording/playing. */
+  @keyframes pv-bar-breathe {
+    0%,
+    100% {
+      transform: scaleY(0.6);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+
+  /* Popover / dialog enter & exit: opacity + ≤8px translate, 120–220ms. */
+  @keyframes pv-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pv-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  .animate-in {
+    animation: pv-in var(--pv-dur) var(--pv-ease);
+  }
+  .animate-out {
+    animation: pv-out var(--pv-dur-fast) var(--pv-ease) forwards;
+  }
+
+  .pv-progress {
+    height: 1px;
+    background: var(--pv-border);
+    overflow: hidden;
+  }
+  .pv-progress > span {
+    display: block;
+    height: 100%;
+    background: var(--pv-accent);
+    transition: width var(--pv-dur) var(--pv-ease);
+  }
+  @keyframes pv-indeterminate {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(300%);
+    }
+  }
+  /* Scrubber: invisible track (drawn by siblings), 12px round thumb. */
+  .pv-scrubber::-webkit-slider-runnable-track {
+    height: 24px;
+    background: transparent;
+  }
+  .pv-scrubber::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    margin-top: 6px;
+    border-radius: 999px;
+    background: var(--pv-ink);
+    border: 2px solid var(--pv-surface);
+    box-shadow: 0 0 0 1px var(--pv-border-strong);
+  }
+  .pv-scrubber::-moz-range-track {
+    height: 24px;
+    background: transparent;
+  }
+  .pv-scrubber::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--pv-ink);
+    border: 2px solid var(--pv-surface);
+    box-shadow: 0 0 0 1px var(--pv-border-strong);
+  }
+  .pv-scrubber:disabled::-webkit-slider-thumb {
+    opacity: 0;
+  }
+  .pv-scrubber:disabled::-moz-range-thumb {
+    opacity: 0;
+  }
+
+  .pv-progress[data-indeterminate="true"] > span {
+    width: 33%;
+    animation: pv-indeterminate 1.4s var(--pv-ease) infinite;
+  }
+}

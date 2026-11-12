@@ -1,0 +1,21 @@
+# PROJECT VOICE — Caddy reverse proxy, DEVELOPMENT (docker-compose.yml).
+# Plain HTTP on :80, automatic HTTPS disabled. Production uses Caddyfile.prod.
+#
+# Routing:  /api/*  → api:8000      (REST + the conversation WebSocket; upgrades pass through)
+#           /*      → frontend:3000 (Next.js)
+# The browser only talks to this origin, so auth cookies stay first-party and the API's CSRF
+# double-submit cookie works unchanged. No secrets live here; every value is an env placeholder.
+
+{
+	auto_https off
+	admin off
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
+import snippets.caddy
+
+:80 {
+	import app_routes
+}

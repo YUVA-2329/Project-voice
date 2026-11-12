@@ -1,0 +1,198 @@
+# PROJECT VOICE — development stack (CPU).
+#
+#   cp .env.example .env            # then edit at least PV_SECRET_KEY
+#   python scripts/download-models.py   # weights → ./models (mounted read-only into the worker)
+#   docker compose up -d --build
+#   open http://localhost            # Caddy → frontend (/) and api (/api/*)
+#
+# Production: add -f docker-compose.prod.yml (and -f docker-compose.gpu.yml on a GPU host).
+# No secrets are stored here: everything comes from .env (git-ignored) via ${VAR:-default}.
+
+name: project-voice
+
+x-backend-env: &backend-env
+  PV_ENV: ${PV_ENV:-development}
+  PV_LOG_LEVEL: ${PV_LOG_LEVEL:-INFO}
+  PV_LOG_JSON: ${PV_LOG_JSON:-true}
+  PV_SECRET_KEY: ${PV_SECRET_KEY:-development-only-secret-key-change-me-before-deploying-0000}
+  PV_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-projectvoice}:${POSTGRES_PASSWORD:-projectvoice}@postgres:5432/${POSTGRES_DB:-projectvoice}
+  PV_REDIS_URL: redis://redis:6379/0
+  PV_PUBLIC_BASE_URL: ${PV_PUBLIC_BASE_URL:-}
+  PV_CORS_ORIGINS: ${PV_CORS_ORIGINS:-http://localhost}
+  PV_COOKIE_DOMAIN: ${PV_COOKIE_DOMAIN:-}
+  PV_STORAGE_BACKEND: ${PV_STORAGE_BACKEND:-local}
+  PV_STORAGE_LOCAL_DIR: /data/storage
+  PV_TMP_DIR: /data/tmp
+  PV_S3_BUCKET: ${PV_S3_BUCKET:-}
+  PV_S3_REGION: ${PV_S3_REGION:-us-east-1}
+  PV_S3_ENDPOINT_URL: ${PV_S3_ENDPOINT_URL:-}
+  PV_S3_ACCESS_KEY_ID: ${PV_S3_ACCESS_KEY_ID:-}
+  PV_S3_SECRET_ACCESS_KEY: ${PV_S3_SECRET_ACCESS_KEY:-}
+  PV_S3_USE_PATH_STYLE: ${PV_S3_USE_PATH_STYLE:-true}
+  PV_MAX_UPLOAD_MB: ${PV_MAX_UPLOAD_MB:-25}
+  PV_RETENTION_DELETE_DELAY_HOURS: ${PV_RETENTION_DELETE_DELAY_HOURS:-0}
+  PV_RATE_LIMIT_ENABLED: ${PV_RATE_LIMIT_ENABLED:-true}
+  PV_CONVERSATION_LLM_BASE_URL: ${PV_CONVERSATION_LLM_BASE_URL:-}
+  PV_CONVERSATION_LLM_MODEL: ${PV_CONVERSATION_LLM_MODEL:-}
+  PV_CONVERSATION_LLM_API_KEY: ${PV_CONVERSATION_LLM_API_KEY:-}
+  PV_MODELS_DIR: /models
+  PV_ENGINE_ENABLED: ${PV_ENGINE_ENABLED:-zipvoice_distill,f5tts,indicf5}
+  PV_ENGINE_NUM_THREADS: ${PV_ENGINE_NUM_THREADS:-0}
+  PV_F5TTS_CKPT: ${PV_F5TTS_CKPT:-}
+  PV_F5TTS_VOCAB: ${PV_F5TTS_VOCAB:-}
+  PV_F5TTS_MODEL_CFG: ${PV_F5TTS_MODEL_CFG:-}
+  PV_F5TTS_VOCODER_DIR: ${PV_F5TTS_VOCODER_DIR:-}
+  PV_F5TTS_WEIGHT_LICENCE: ${PV_F5TTS_WEIGHT_LICENCE:-unknown}
+  PV_F5TTS_LANGUAGES: ${PV_F5TTS_LANGUAGES:-en}
+  PV_INDICF5_MODEL: ${PV_INDICF5_MODEL:-ai4bharat/IndicF5}
+  PV_HF_TOKEN: ${PV_HF_TOKEN:-}
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-projectvoice}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-projectvoice}
+      POSTGRES_DB: ${POSTGRES_DB:-projectvoice}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+    # Not published: only reachable from the compose network. Uncomment for host tooling.
+    # ports: ["127.0.0.1:5432:5432"]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: project-voice/api:${PV_IMAGE_TAG:-dev}
+    restart: unless-stopped
+    # entrypoint-api.sh: wait for postgres → alembic upgrade head → uvicorn
+    environment:
+      <<: *backend-env
+      PV_API_WORKERS: ${PV_API_WORKERS:-1}
+      PV_FORWARDED_ALLOW_IPS: "*"
+    volumes:
+      - storage:/data
+      # Conversation mode runs Silero VAD + Whisper-base inside the API process (ONNX only).
+      - ./models:/models:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/v1/system/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    # Not published: Caddy fronts it. For direct API access during development:
+    # ports: ["127.0.0.1:8000:8000"]
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    image: project-voice/worker:${PV_IMAGE_TAG:-dev}
+    restart: unless-stopped
+    environment:
+      <<: *backend-env
+      PV_ENGINE_DEVICE: ${PV_ENGINE_DEVICE:-cpu}
+      PV_ENGINE_MAX_RESIDENT_MODELS: ${PV_ENGINE_MAX_RESIDENT_MODELS:-1}
+      PV_ENGINE_ALLOW_CPU_FALLBACK: ${PV_ENGINE_ALLOW_CPU_FALLBACK:-true}
+      PV_WORKER_QUEUES: ${PV_WORKER_QUEUES:-voice,generation}
+    command: ["sh", "-c", "exec python -m app.jobs.worker --queues \"$${PV_WORKER_QUEUES}\""]
+    volumes:
+      - ./models:/models:ro
+      - storage:/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      api:
+        condition: service_healthy   # migrations have been applied by then
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import socket,sys,redis;from app.core.config import get_settings;r=redis.Redis.from_url(get_settings().REDIS_URL);sys.exit(0 if any(r.scan_iter('pv:worker:'+socket.gethostname()+':*')) else 1)"
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: project-voice/frontend:${PV_IMAGE_TAG:-dev}
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      # Next.js rewrites /api/* to the API over the compose network (server side only).
+      API_INTERNAL_URL: http://api:8000
+      # NEXT_PUBLIC_WS_BASE is intentionally unset: Caddy proxies the WebSocket on the same
+      # origin, so the browser derives ws(s)://<host>/api/v1/conversation/ws itself.
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:3000/ >/dev/null 2>&1 || curl -fsS http://127.0.0.1:3000/ >/dev/null"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "${CADDY_HTTP_PORT:-80}:80"
+    environment:
+      CADDY_MAX_BODY: ${CADDY_MAX_BODY:-32MB}
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./infra/caddy/snippets.caddy:/etc/caddy/snippets.caddy:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      api:
+        condition: service_healthy
+      frontend:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/api/v1/system/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  pgdata:
+  redisdata:
+  storage:
+  caddy_data:
+  caddy_config:

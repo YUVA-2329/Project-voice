@@ -1,0 +1,117 @@
+{
+  "ok": true,
+  "base": "http://localhost:3000",
+  "mic_wav": "/home/claude/project-voice/evidence/generation_short.wav",
+  "upload_wav": "/home/claude/project-voice/models/zipvoice-distill/test_wavs/news-female.wav",
+  "user": "browser-mw9gvhtl@example.com",
+  "total_seconds": 71.481,
+  "steps": [
+    {
+      "name": "1. open introduction and create an account",
+      "ok": true,
+      "seconds": 0.879,
+      "detail": "email=browser-mw9gvhtl@example.com"
+    },
+    {
+      "name": "2. sign out and log in",
+      "ok": true,
+      "seconds": 0.826,
+      "detail": ""
+    },
+    {
+      "name": "3. record a voice with the (fake-device) microphone",
+      "ok": true,
+      "seconds": 12.992,
+      "detail": ""
+    },
+    {
+      "name": "4. name the voice and confirm consent",
+      "ok": true,
+      "seconds": 0.123,
+      "detail": "create aria-disabled before consent=true"
+    },
+    {
+      "name": "5–6. create the voice clone and wait for real processing",
+      "ok": true,
+      "seconds": 4.422,
+      "detail": "We heard"
+    },
+    {
+      "name": "7. the voice appears in My Voices",
+      "ok": true,
+      "seconds": 0.195,
+      "detail": ""
+    },
+    {
+      "name": "8–9. refresh the page — the voice persists",
+      "ok": true,
+      "seconds": 0.184,
+      "detail": "cards=1"
+    },
+    {
+      "name": "10. select the voice",
+      "ok": true,
+      "seconds": 0.13,
+      "detail": ""
+    },
+    {
+      "name": "11–13. type a sentence, press Run and wait for real inference",
+      "ok": true,
+      "seconds": 22.045,
+      "detail": "waited 22.0s; last progress label=\"Synthesising\""
+    },
+    {
+      "name": "14. play the generated speech in the page",
+      "ok": true,
+      "seconds": 1.899,
+      "detail": "currentTime=1.80s duration=7.48s id=06af1f2b-3b2f-7d22-8000-4696fae0b90d"
+    },
+    {
+      "name": "15–16. download the audio and verify the WAV file",
+      "ok": true,
+      "seconds": 0.069,
+      "detail": "project-voice-06af1f2b-3b2f-7d22-8000-4696fae0b90d.wav 359434 bytes, 24000 Hz, 1ch, 7.48s"
+    },
+    {
+      "name": "17. generate a second sentence",
+      "ok": true,
+      "seconds": 21.819,
+      "detail": ""
+    },
+    {
+      "name": "18. history lists both generations",
+      "ok": true,
+      "seconds": 0.201,
+      "detail": "download controls=2"
+    },
+    {
+      "name": "19. create a second authorised voice by upload",
+      "ok": true,
+      "seconds": 4.767,
+      "detail": ""
+    },
+    {
+      "name": "20. both voices are listed separately",
+      "ok": true,
+      "seconds": 0.204,
+      "detail": ""
+    },
+    {
+      "name": "21. delete the uploaded voice",
+      "ok": true,
+      "seconds": 0.158,
+      "detail": ""
+    },
+    {
+      "name": "22. deletion persists after reload; recorded voice remains",
+      "ok": true,
+      "seconds": 0.395,
+      "detail": "history still lists generations of the remaining voice"
+    }
+  ],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "pageerror: Failed to execute 'querySelector' on 'Document': 'button:has-text(\"Continue\")' is not a valid selector."
+  ]
+}

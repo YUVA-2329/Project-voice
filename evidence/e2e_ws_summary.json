@@ -1,0 +1,231 @@
+{
+  "ok": true,
+  "started_at": "2026-11-09T16:25:58Z",
+  "total_seconds": 41.84,
+  "steps": [
+    {
+      "name": "register + login",
+      "ok": true,
+      "seconds": 0.264,
+      "detail": "user_id=06af1f41-6b92-7ef0-8000-4d22486505f9 email=ws-47288012@example.com"
+    },
+    {
+      "name": "upload voice",
+      "ok": true,
+      "seconds": 0.099,
+      "detail": "voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a job_id=06af1f41-6f0d-77d8-8000-d5465e9a763c"
+    },
+    {
+      "name": "voice ready",
+      "ok": true,
+      "seconds": 1.54,
+      "detail": "status=ready error=None"
+    },
+    {
+      "name": "input audio resampled to 16 kHz PCM16",
+      "ok": true,
+      "seconds": 0.391,
+      "detail": "/home/claude/project-voice/evidence/generation_short.wav: 8.09s, 258732 bytes"
+    },
+    {
+      "name": "websocket connected",
+      "ok": true,
+      "seconds": 0.018,
+      "detail": "ws://localhost:8000/api/v1/conversation/ws?voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a&engine=mirror"
+    },
+    {
+      "name": "start \u2192 listening",
+      "ok": true,
+      "seconds": 0.099,
+      "detail": ""
+    },
+    {
+      "name": "streamed PCM16 frames",
+      "ok": true,
+      "seconds": 8.246,
+      "detail": "203 frames \u00d7 40 ms = 8.12s audio, 258732 bytes"
+    },
+    {
+      "name": "turn without language hint (auto-detect)",
+      "ok": true,
+      "seconds": 19.296,
+      "detail": "transcript='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' reply=37 frames order=['state:idle', 'state:listening', 'client', 'state:thinking', 'transcript', 'response', 'state:speaking', 'audio_start', 'audio_end', 'state:listening']"
+    },
+    {
+      "name": "websocket connected",
+      "ok": true,
+      "seconds": 0.003,
+      "detail": "ws://localhost:8000/api/v1/conversation/ws?voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a&engine=mirror&language=en"
+    },
+    {
+      "name": "start \u2192 listening",
+      "ok": true,
+      "seconds": 0.025,
+      "detail": ""
+    },
+    {
+      "name": "streamed PCM16 frames",
+      "ok": true,
+      "seconds": 8.242,
+      "detail": "203 frames \u00d7 40 ms = 8.12s audio, 258732 bytes"
+    },
+    {
+      "name": "full conversation turn",
+      "ok": true,
+      "seconds": 18.512,
+      "detail": "order=['state:idle', 'state:listening', 'client', 'state:thinking', 'transcript', 'response', 'state:speaking', 'audio_start', 'audio_end', 'state:listening'] transcript='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' response='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' reply=37 frames, 24000 Hz, 7.24s"
+    },
+    {
+      "name": "round-trip transcription of reply (Transcriber)",
+      "ok": true,
+      "seconds": 1.69,
+      "detail": "'Hello, this is Manin. People speak up to project voice. Your voice, your words.' language=en whisper=1.59s"
+    }
+  ],
+  "turn_without_hint": {
+    "events": [
+      {
+        "t": 0.098,
+        "type": "state",
+        "state": "idle"
+      },
+      {
+        "t": 0.099,
+        "type": "state",
+        "state": "listening"
+      },
+      {
+        "t": 8.345,
+        "type": "client",
+        "sent": "stop"
+      },
+      {
+        "t": 8.357,
+        "type": "state",
+        "state": "thinking"
+      },
+      {
+        "t": 10.46,
+        "type": "transcript",
+        "text": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words."
+      },
+      {
+        "t": 10.46,
+        "type": "response",
+        "text": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words."
+      },
+      {
+        "t": 18.209,
+        "type": "state",
+        "state": "speaking"
+      },
+      {
+        "t": 18.209,
+        "type": "audio_start",
+        "sample_rate": 24000
+      },
+      {
+        "t": 18.222,
+        "type": "audio_end"
+      },
+      {
+        "t": 18.222,
+        "type": "state",
+        "state": "listening"
+      }
+    ],
+    "order": [
+      "state:idle",
+      "state:listening",
+      "client",
+      "state:thinking",
+      "transcript",
+      "response",
+      "state:speaking",
+      "audio_start",
+      "audio_end",
+      "state:listening"
+    ],
+    "transcript": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words.",
+    "response": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words.",
+    "sample_rate": 24000,
+    "frames": 37,
+    "seconds": 19.29
+  },
+  "voice_id": "06af1f41-6ef2-743e-8000-de07ad04aa7a",
+  "input_file": "/home/claude/project-voice/evidence/generation_short.wav",
+  "language_hint": "en",
+  "input_seconds": 8.09,
+  "message_order": [
+    "state:idle",
+    "state:listening",
+    "client",
+    "state:thinking",
+    "transcript",
+    "response",
+    "state:speaking",
+    "audio_start",
+    "audio_end",
+    "state:listening"
+  ],
+  "transcript_of_input": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words.",
+  "response_text": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words.",
+  "reply_sample_rate": 24000,
+  "reply_frames": 37,
+  "reply_seconds": 7.24,
+  "reply_file": "/home/claude/project-voice/evidence/conversation_reply.wav",
+  "reply_transcript": "Hello, this is Manin. People speak up to project voice. Your voice, your words.",
+  "reply_language": "en",
+  "word_overlap": 0.727,
+  "events": [
+    {
+      "t": 0.024,
+      "type": "state",
+      "state": "idle"
+    },
+    {
+      "t": 0.025,
+      "type": "state",
+      "state": "listening"
+    },
+    {
+      "t": 8.267,
+      "type": "client",
+      "sent": "stop"
+    },
+    {
+      "t": 8.275,
+      "type": "state",
+      "state": "thinking"
+    },
+    {
+      "t": 9.968,
+      "type": "transcript",
+      "text": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words."
+    },
+    {
+      "t": 9.968,
+      "type": "response",
+      "text": "Hello, this is my K-Luvans voice picked up project voice, your voice, your words."
+    },
+    {
+      "t": 17.447,
+      "type": "state",
+      "state": "speaking"
+    },
+    {
+      "t": 17.447,
+      "type": "audio_start",
+      "sample_rate": 24000
+    },
+    {
+      "t": 17.46,
+      "type": "audio_end"
+    },
+    {
+      "t": 17.46,
+      "type": "state",
+      "state": "listening"
+    }
+  ]
+}

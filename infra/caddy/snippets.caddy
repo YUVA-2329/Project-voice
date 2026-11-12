@@ -1,0 +1,50 @@
+# Shared routing + security headers for both Caddyfiles (imported, never served directly).
+
+(security_headers) {
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), geolocation=(), microphone=(self), payment=()"
+		-Server
+		-X-Powered-By
+	}
+}
+
+(app_routes) {
+	import security_headers
+
+	# Reference uploads are capped by the API (PV_MAX_UPLOAD_MB, default 25 MB). Allow headroom
+	# for multipart framing so the API — not the proxy — returns the size error (default 32 MB).
+	request_body {
+		max_size {$CADDY_MAX_BODY:32MB}
+	}
+
+	encode zstd gzip
+
+	@api path /api/*
+	handle @api {
+		reverse_proxy {$API_UPSTREAM:api:8000} {
+			# WebSocket upgrades are proxied transparently. Long-lived conversation sockets and
+			# slow CPU synthesis need generous timeouts; streaming responses must not buffer.
+			flush_interval -1
+			transport http {
+				dial_timeout 10s
+				read_timeout 0
+				write_timeout 0
+				response_header_timeout 600s
+			}
+		}
+	}
+
+	handle {
+		reverse_proxy {$FRONTEND_UPSTREAM:frontend:3000} {
+			flush_interval -1
+		}
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}

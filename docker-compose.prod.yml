@@ -1,0 +1,169 @@
+# PROJECT VOICE — production overrides. Always combine with the base file:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml --profile s3 up -d   # + MinIO
+#
+# Required in .env: PV_ENV=production, PV_SECRET_KEY (>= 32 random chars), POSTGRES_PASSWORD,
+# DOMAIN, ACME_EMAIL. With --profile s3 also PV_STORAGE_BACKEND=s3, PV_S3_* and MINIO_ROOT_*.
+# PV_ENV=production makes the API refuse the development secret and sets Secure cookies, which
+# is why Caddy must terminate HTTPS (Caddyfile.prod).
+
+name: project-voice
+
+services:
+  postgres:
+    restart: unless-stopped
+    command:
+      - postgres
+      - -c
+      - shared_buffers=${POSTGRES_SHARED_BUFFERS:-256MB}
+      - -c
+      - max_connections=${POSTGRES_MAX_CONNECTIONS:-100}
+      - -c
+      - log_min_duration_statement=1000
+    deploy:
+      resources:
+        limits:
+          cpus: "${POSTGRES_CPUS:-1.0}"
+          memory: ${POSTGRES_MEMORY:-1g}
+    logging: &logging
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+  redis:
+    restart: unless-stopped
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory
+      - ${REDIS_MAXMEMORY:-256mb}
+      - --maxmemory-policy
+      - noeviction     # queue + rate-limit state must never be evicted
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: ${REDIS_MEMORY:-384m}
+    logging: *logging
+
+  api:
+    restart: unless-stopped
+    environment:
+      PV_ENV: production
+      PV_LOG_JSON: "true"
+      PV_API_WORKERS: ${PV_API_WORKERS:-2}
+      PV_PUBLIC_BASE_URL: https://${DOMAIN:?set DOMAIN in .env}
+      PV_CORS_ORIGINS: https://${DOMAIN}
+    deploy:
+      resources:
+        limits:
+          cpus: "${API_CPUS:-1.0}"
+          memory: ${API_MEMORY:-768m}
+      replicas: ${API_REPLICAS:-1}
+    logging: *logging
+
+  worker:
+    restart: unless-stopped
+    environment:
+      PV_ENV: production
+      PV_LOG_JSON: "true"
+    deploy:
+      resources:
+        limits:
+          cpus: "${WORKER_CPUS:-2.0}"
+          memory: ${WORKER_MEMORY:-6g}      # ZipVoice int8+fp32 + Whisper fit in ~3 GB; F5-TTS needs more
+        reservations:
+          memory: ${WORKER_MEMORY_RESERVE:-2g}
+    logging: *logging
+
+  frontend:
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 512m
+    logging: *logging
+
+  caddy:
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"     # HTTP/3
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL in .env}
+      CADDY_MAX_BODY: ${CADDY_MAX_BODY:-32MB}
+    volumes:
+      - ./infra/caddy/Caddyfile.prod:/etc/caddy/Caddyfile:ro
+      - ./infra/caddy/snippets.caddy:/etc/caddy/snippets.caddy:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "--no-check-certificate", "https://127.0.0.1/api/v1/system/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256m
+    logging: *logging
+
+  # ---- optional S3-compatible object storage (docker compose --profile s3) -----------------
+  # Set PV_STORAGE_BACKEND=s3, PV_S3_ENDPOINT_URL=http://minio:9000, PV_S3_BUCKET=project-voice,
+  # PV_S3_ACCESS_KEY_ID/PV_S3_SECRET_ACCESS_KEY (= MINIO_ROOT_USER/PASSWORD or a dedicated key)
+  # and PV_S3_USE_PATH_STYLE=true in .env. minio-init creates the bucket once and exits.
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    profiles: ["s3"]
+    restart: unless-stopped
+    command: ["server", "/data", "--console-address", ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-}          # required with --profile s3 (MinIO refuses to start when empty)
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-}  # >= 8 chars
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1g
+    logging: *logging
+    # Console on 9001 is not published; use `docker compose exec minio mc …` or an SSH tunnel.
+
+  minio-init:
+    image: minio/mc:RELEASE.2025-04-16T18-13-26Z
+    profiles: ["s3"]
+    restart: "no"
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-}
+      PV_S3_BUCKET: ${PV_S3_BUCKET:-project-voice}
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        set -eu
+        mc alias set local http://minio:9000 "$$MINIO_ROOT_USER" "$$MINIO_ROOT_PASSWORD"
+        mc mb --ignore-existing "local/$$PV_S3_BUCKET"
+        # Objects are private; the API hands out pre-signed GET URLs (PV_S3_PRESIGN_TTL_SECONDS).
+        mc anonymous set none "local/$$PV_S3_BUCKET"
+        echo "bucket $$PV_S3_BUCKET ready"
+
+volumes:
+  miniodata:

@@ -1,0 +1,17 @@
+[   0.04s] health: {"database": {"status": "ok", "detail": null, "latency_ms": 2.1}, "redis": {"status": "ok", "detail": null, "latency_ms": 0.7}, "storage": {"status": "ok", "detail": null, "latency_ms": 0.7}, "worker": {"status": "ok", "last_heartbeat": "2026-11-09T16:25:42.035207Z", "workers": 1}}
+[   0.30s] ✓ register + login (0.26s) — user_id=06af1f41-6b92-7ef0-8000-4d22486505f9 email=ws-47288012@example.com
+[   0.40s] ✓ upload voice (0.10s) — voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a job_id=06af1f41-6f0d-77d8-8000-d5465e9a763c
+[   1.94s] ✓ voice ready (1.54s) — status=ready error=None
+[   2.33s] ✓ input audio resampled to 16 kHz PCM16 (0.39s) — /home/claude/project-voice/evidence/generation_short.wav: 8.09s, 258732 bytes
+[   2.35s] ✓ websocket connected (0.02s) — ws://localhost:8000/api/v1/conversation/ws?voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a&engine=mirror
+[   2.43s] ✓ start → listening (0.10s)
+[  10.68s] ✓ streamed PCM16 frames (8.25s) — 203 frames × 40 ms = 8.12s audio, 258732 bytes
+[  21.63s] ✓ turn without language hint (auto-detect) (19.30s) — transcript='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' reply=37 frames order=['state:idle', 'state:listening', 'client', 'state:thinking', 'transcript', 'response', 'state:speaking', 'audio_start', 'audio_end', 'state:listening']
+[  21.63s] ✓ websocket connected (0.00s) — ws://localhost:8000/api/v1/conversation/ws?voice_id=06af1f41-6ef2-743e-8000-de07ad04aa7a&engine=mirror&language=en
+[  21.66s] ✓ start → listening (0.03s)
+[  29.90s] ✓ streamed PCM16 frames (8.24s) — 203 frames × 40 ms = 8.12s audio, 258732 bytes
+[  40.14s] ✓ full conversation turn (18.51s) — order=['state:idle', 'state:listening', 'client', 'state:thinking', 'transcript', 'response', 'state:speaking', 'audio_start', 'audio_end', 'state:listening'] transcript='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' response='Hello, this is my K-Luvans voice picked up project voice, your voice, your words.' reply=37 frames, 24000 Hz, 7.24s
+[  40.14s]     saved reply → /home/claude/project-voice/evidence/conversation_reply.wav (347648 bytes, 7.24s @ 24000 Hz)
+[  41.84s] ✓ round-trip transcription of reply (Transcriber) (1.69s) — 'Hello, this is Manin. People speak up to project voice. Your voice, your words.' language=en whisper=1.59s
+[  41.84s]     word overlap(input transcript, reply transcript) = 73%
+[  41.84s] RESULT: PASS

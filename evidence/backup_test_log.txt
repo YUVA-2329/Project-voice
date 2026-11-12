@@ -1,0 +1,5 @@
+[backup 15:31:33] pg_dump → /tmp/claude-0/backups/20261109T153133Z/db.dump
+[backup 15:31:33] tar → /tmp/claude-0/backups/20261109T153133Z/storage.tar.gz (from /home/claude/project-voice/storage)
+[backup 15:31:35] manifest: { "created_at": "20261109T153133Z", "host": "vm", "database": {"file": "db.dump", "bytes": 88296, "sha256": "fbf596de44418413c9cd022734a729b6e83a397e7d83d8796d7a1c2b55570185", "format": "pg_dump custom", "row_counts": {"alembic_version":1,"model_registry":3,"users":6,"api_keys":2,"audit_events":77,"idempotency_keys":8,"processing_jobs":24,"user_sessions":12,"voice_profiles":6,"generations":12,"voi
+[backup 15:31:35] done: /tmp/claude-0/backups/20261109T153133Z (db 88296 B, storage 12450930 B, keeping newest 2)
+/tmp/claude-0/backups/20261109T153133Z

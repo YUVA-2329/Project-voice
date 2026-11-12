@@ -1,0 +1,9 @@
+node_modules
+.next
+screenshots
+coverage
+.env*
+*.log
+Dockerfile
+.dockerignore
+README.md

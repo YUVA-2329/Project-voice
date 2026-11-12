@@ -1,0 +1,7 @@
+[restore 15:31:45] restoring db.dump into projectvoice_restore_test (schema public is dropped first)
+[restore 15:31:45] database restored (alembic_version=0002)
+[restore 15:31:46] storage restored into /tmp/claude-0/restore_storage (48 files)
+[restore 15:31:46] verifying row counts against manifest
+[restore 15:31:46] row counts match: {"alembic_version": 1, "api_keys": 2, "audit_events": 77, "generation_files": 12, "generations": 12, "idempotency_keys": 8, "model_registry": 3, "processing_jobs": 24, "user_sessions": 12, "users": 6, "voice_consents": 8, "voice_profiles": 6, "voice_reference_files": 12}
+[restore 15:31:46] storage file count matches: 48
+[restore 15:31:46] restore complete

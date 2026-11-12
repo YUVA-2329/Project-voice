@@ -1,0 +1,91 @@
+# PROJECT VOICE — CUDA worker image (RQ worker + AI engine on an NVIDIA GPU).
+#
+# Run with `docker compose -f docker-compose.yml -f docker-compose.gpu.yml up`, or
+# `docker run --gpus all …`. Requires the NVIDIA Container Toolkit on the host.
+#
+# NOT built in the authoring environment: download.pytorch.org (torch cu12x wheels) was blocked
+# there. The layout mirrors Dockerfile.worker; only the base image, the torch index and the
+# device default differ.
+# syntax=docker/dockerfile:1.7
+
+ARG CUDA_IMAGE=nvidia/cuda:12.4.1-cudnn-runtime-ubuntu22.04
+ARG TORCH_INDEX_URL=https://download.pytorch.org/whl/cu124
+ARG TORCH_SPEC="torch>=2.2"
+
+# ------------------------------------------------------------------------------ builder
+FROM ${CUDA_IMAGE} AS builder
+ARG TORCH_INDEX_URL
+ARG TORCH_SPEC
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    VIRTUAL_ENV=/opt/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Ubuntu 22.04 ships Python 3.10; install 3.11 from deadsnakes so the worker matches the API image.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends software-properties-common ca-certificates curl gnupg \
+    && add-apt-repository -y ppa:deadsnakes/ppa \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        python3.11 python3.11-venv python3.11-dev build-essential \
+    && rm -rf /var/lib/apt/lists/* \
+    && python3.11 -m venv "$VIRTUAL_ENV" \
+    && pip install --upgrade pip wheel
+
+WORKDIR /src
+COPY pyproject.toml README.md ./
+COPY app ./app
+COPY alembic ./alembic
+COPY alembic.ini ./
+# CUDA 12.4 torch wheels from the official PyTorch index, then the engine extras.
+# sherpa-onnx's CUDA provider is a separate wheel; the default wheel runs ONNX on CPU, which is
+# fine (ZipVoice/Whisper/VAD are light), while F5-TTS / IndicF5 use torch on the GPU.
+RUN pip install --index-url "${TORCH_INDEX_URL}" "${TORCH_SPEC}" \
+    && pip install ".[engine]"
+
+# ------------------------------------------------------------------------------ runtime
+FROM ${CUDA_IMAGE} AS runtime
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    VIRTUAL_ENV=/opt/venv \
+    NVIDIA_VISIBLE_DEVICES=all \
+    NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends software-properties-common ca-certificates \
+    && add-apt-repository -y ppa:deadsnakes/ppa \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+        python3.11 libpython3.11 ffmpeg libsndfile1 libgomp1 tini \
+    && apt-get purge -y --auto-remove software-properties-common \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --system --gid 10001 app \
+    && useradd --system --uid 10001 --gid app --home /app --shell /usr/sbin/nologin app
+
+WORKDIR /app
+COPY --from=builder /opt/venv /opt/venv
+COPY --chown=app:app pyproject.toml README.md alembic.ini ./
+COPY --chown=app:app app ./app
+COPY --chown=app:app alembic ./alembic
+RUN mkdir -p /data/storage /data/tmp /models && chown -R app:app /app /data /models
+
+ENV PV_STORAGE_LOCAL_DIR=/data/storage \
+    PV_TMP_DIR=/data/tmp \
+    PV_MODELS_DIR=/models \
+    PV_ENGINE_DEVICE=cuda \
+    PV_ENGINE_ALLOW_CPU_FALLBACK=true
+
+USER app
+VOLUME ["/models", "/data"]
+
+HEALTHCHECK --interval=60s --timeout=10s --start-period=180s --retries=3 \
+    CMD python -c "import socket,sys,redis;from app.core.config import get_settings;r=redis.Redis.from_url(get_settings().REDIS_URL);sys.exit(0 if any(r.scan_iter('pv:worker:'+socket.gethostname()+':*')) else 1)"
+
+ENTRYPOINT ["tini", "--"]
+CMD ["python", "-m", "app.jobs.worker", "--queues", "voice,generation"]
