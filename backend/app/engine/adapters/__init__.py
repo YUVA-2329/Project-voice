@@ -14,10 +14,12 @@ def known_adapters() -> dict[str, EngineFactory]:
     """Engine id → factory.  Imports are local so an adapter's heavy deps load only when built."""
     from app.engine.adapters.f5tts import F5TTSEngine
     from app.engine.adapters.indicf5 import IndicF5Engine
+    from app.engine.adapters.indiconnx import IndicONNXEngine
     from app.engine.adapters.zipvoice import ZipVoiceEngine
 
     return {
         ZipVoiceEngine.ENGINE_ID: ZipVoiceEngine,
+        IndicONNXEngine.ENGINE_ID: IndicONNXEngine,
         F5TTSEngine.ENGINE_ID: F5TTSEngine,
         IndicF5Engine.ENGINE_ID: IndicF5Engine,
     }

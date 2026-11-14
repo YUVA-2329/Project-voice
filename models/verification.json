@@ -1,0 +1,90 @@
+{
+  "indiconnx": {
+    "hi": {
+      "device": "cpu",
+      "duration_seconds": 6.304,
+      "hostname": "RRR",
+      "peak_dbfs": -1.0000002900227403,
+      "quality": "balanced",
+      "rtf": 2.3961967480996638,
+      "test": "scripts/test_pipeline_synthesize.py::hi",
+      "verified_at": "2026-11-14T16:10:06+00:00",
+      "weights_signature": "hi:114416260;kn:114418566;ml:114425480;ta:114405508;te:114410885"
+    },
+    "kn": {
+      "device": "cpu",
+      "duration_seconds": 7.232,
+      "hostname": "RRR",
+      "peak_dbfs": -1.0000002900227403,
+      "quality": "balanced",
+      "rtf": 2.284980558633994,
+      "test": "scripts/test_pipeline_synthesize.py::kn",
+      "verified_at": "2026-11-14T16:10:22+00:00",
+      "weights_signature": "hi:114416260;kn:114418566;ml:114425480;ta:114405508;te:114410885"
+    },
+    "ml": {
+      "device": "cpu",
+      "duration_seconds": 6.56,
+      "hostname": "RRR",
+      "peak_dbfs": -1.0000002900227403,
+      "quality": "balanced",
+      "rtf": 2.432742560977647,
+      "test": "scripts/test_pipeline_synthesize.py::ml",
+      "verified_at": "2026-11-14T16:10:39+00:00",
+      "weights_signature": "hi:114416260;kn:114418566;ml:114425480;ta:114405508;te:114410885"
+    },
+    "ta": {
+      "device": "cpu",
+      "duration_seconds": 6.096,
+      "hostname": "RRR",
+      "peak_dbfs": -1.0000002900227403,
+      "quality": "balanced",
+      "rtf": 2.5679929461952735,
+      "test": "scripts/test_pipeline_synthesize.py::ta",
+      "verified_at": "2026-11-14T16:09:50+00:00",
+      "weights_signature": "hi:114416260;kn:114418566;ml:114425480;ta:114405508;te:114410885"
+    },
+    "te": {
+      "device": "cpu",
+      "duration_seconds": 6.32,
+      "hostname": "RRR",
+      "peak_dbfs": -1.0000002900227403,
+      "quality": "balanced",
+      "rtf": 2.5388355063229557,
+      "test": "scripts/test_pipeline_synthesize.py::te",
+      "verified_at": "2026-11-14T16:09:35+00:00",
+      "weights_signature": "hi:114416260;kn:114418566;ml:114425480;ta:114405508;te:114410885"
+    }
+  },
+  "zipvoice_distill": {
+    "en": {
+      "asr_attempts": 2,
+      "asr_overlap": 0.7741935483870968,
+      "asr_overlaps": [
+        0.452,
+        0.774
+      ],
+      "device": "cpu",
+      "hostname": "RRR",
+      "quality": "fast",
+      "rtf": 1.2426455803568834,
+      "test": "tests/model/test_zipvoice_pipeline.py::test_synthesize_english_and_asr_round_trip",
+      "verified_at": "2026-11-12T16:33:45+00:00",
+      "weights_signature": "decoder.fp32.onnx:477534010;decoder.int8.onnx:124657100;encoder.fp32.onnx:17633735;encoder.int8.onnx:5570211;vocos_24khz.onnx:54157409"
+    },
+    "zh": {
+      "asr_attempts": 1,
+      "asr_overlap": 0.9565217391304348,
+      "asr_overlaps": [
+        0.957
+      ],
+      "device": "cpu",
+      "hostname": "RRR",
+      "quality": "balanced",
+      "rtf": 5.590652081284137,
+      "test": "tests/model/test_zipvoice_pipeline.py::test_synthesize_chinese",
+      "verified_at": "2026-11-12T16:34:19+00:00",
+      "weights_signature": "decoder.fp32.onnx:477534010;decoder.int8.onnx:124657100;encoder.fp32.onnx:17633735;encoder.int8.onnx:5570211;vocos_24khz.onnx:54157409"
+    }
+  }
+}

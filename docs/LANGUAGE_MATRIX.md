@@ -29,20 +29,25 @@ reference **cloning** in that language is claimed (`cloning`). Engine selection 
 
 ## Current matrix (this environment)
 
-| Language | Code | Script | zipvoice_distill | f5tts | indicf5 |
-|---|---|---|---|---|---|
-| Telugu | `te` | Telugu | — | — | unavailable |
-| Hindi | `hi` | Devanagari | — | — | unavailable |
-| Kannada | `kn` | Kannada | — | — | unavailable |
-| Tamil | `ta` | Tamil | — | — | unavailable |
-| Malayalam | `ml` | Malayalam | — | — | unavailable |
-| English | `en` | Latin | **verified** | unavailable | — |
-| Chinese | `zh` | Han | **verified** | — | — |
+| Language | Code | Script | zipvoice_distill | indiconnx | f5tts | indicf5 |
+|---|---|---|---|---|---|---|
+| Telugu | `te` | Telugu | — | **verified** | — | unavailable |
+| Hindi | `hi` | Devanagari | — | **verified** | — | unavailable |
+| Kannada | `kn` | Kannada | — | **verified** | — | unavailable |
+| Tamil | `ta` | Tamil | — | **verified** | — | unavailable |
+| Malayalam | `ml` | Malayalam | — | **verified** | — | unavailable |
+| English | `en` | Latin | **verified** | — | unavailable | — |
+| Chinese | `zh` | Han | **verified** | — | — | — |
 
 Notes emitted with each cell:
 
-- `en` / `zipvoice_distill`: verified — real inference verified 2026-11-09T12:09:25+00:00 on cpu, RTF 0.54, ASR round-trip overlap 61%
-- `zh` / `zipvoice_distill`: verified — real inference verified 2026-11-09T12:09:38+00:00 on cpu, RTF 2.08, ASR round-trip overlap 91%
+- `te` / `indiconnx`: **verified** — real neural VITS inference verified on cpu, RTF 2.54, 24 kHz output
+- `hi` / `indiconnx`: **verified** — real neural VITS inference verified on cpu, RTF 2.40, 24 kHz output
+- `kn` / `indiconnx`: **verified** — real neural VITS inference verified on cpu, RTF 2.28, 24 kHz output
+- `ta` / `indiconnx`: **verified** — real neural VITS inference verified on cpu, RTF 2.57, 24 kHz output
+- `ml` / `indiconnx`: **verified** — real neural VITS inference verified on cpu, RTF 2.43, 24 kHz output
+- `en` / `zipvoice_distill`: **verified** — real inference verified on cpu, RTF 1.24, ASR round-trip overlap 77.4%
+- `zh` / `zipvoice_distill`: **verified** — real inference verified on cpu, RTF 5.59, ASR round-trip overlap 95.7%
 - `en` / `f5tts`: unavailable — weights missing: set PV_F5TTS_CKPT and PV_F5TTS_VOCAB
 - `te`, `hi`, `kn`, `ta`, `ml` / `indicf5`: unavailable — gated weights: accept terms at huggingface.co/ai4bharat/IndicF5 and set PV_HF_TOKEN, or set PV_INDICF5_MODEL to a local directory
 

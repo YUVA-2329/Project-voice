@@ -18,12 +18,16 @@ const INDIC_LANGUAGES: { code: LanguageHint; name: string; nativeName: string }[
   { code: "te", name: "Telugu", nativeName: "తెలుగు" },
   { code: "ta", name: "Tamil", nativeName: "தமிழ்" },
   { code: "hi", name: "Hindi", nativeName: "हिन्दी" },
+  { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ" },
+  { code: "ml", name: "Malayalam", nativeName: "മലയാളം" },
   { code: "en", name: "English", nativeName: "English" },
 ];
 
 const HINDI_MARKERS = new Set(["hai", "hain", "kya", "kaise", "ho", "aap", "hum", "bhai", "nahi", "nahin", "namaste", "shukriya", "dhanyawad", "bohot", "achha"]);
 const TELUGU_MARKERS = new Set(["ela", "unnaru", "unnara", "bagunnara", "enti", "cheppandi", "chala", "meeru", "nenu", "namaskaram", "dhanyavadalu", "randi"]);
 const TAMIL_MARKERS = new Set(["vanakkam", "epdi", "eppadi", "irukeenga", "nanba", "nalla", "enna", "romba", "thamizh", "tamil", "nandri", "vaanga"]);
+const KANNADA_MARKERS = new Set(["namaskara", "hegiddira", "chennagiddira", "kannada", "dhanyavadagalu", "swagatha", "neevu", "haudu", "banni"]);
+const MALAYALAM_MARKERS = new Set(["namaskaram", "sughamano", "malayalam", "nandi", "swagatham", "ningal", "athe", "varoo"]);
 
 export function detectLanguageClient(text: string): DetectionResult {
   const clean = text.trim();
@@ -34,6 +38,8 @@ export function detectLanguageClient(text: string): DetectionResult {
   let teCount = 0;
   let taCount = 0;
   let hiCount = 0;
+  let knCount = 0;
+  let mlCount = 0;
   let latinCount = 0;
   let totalLetters = 0;
 
@@ -47,6 +53,12 @@ export function detectLanguageClient(text: string): DetectionResult {
       totalLetters++;
     } else if (code >= 0x0900 && code <= 0x097f) {
       hiCount++;
+      totalLetters++;
+    } else if (code >= 0x0c80 && code <= 0x0cff) {
+      knCount++;
+      totalLetters++;
+    } else if (code >= 0x0d00 && code <= 0x0d7f) {
+      mlCount++;
       totalLetters++;
     } else if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)) {
       latinCount++;
@@ -68,6 +80,14 @@ export function detectLanguageClient(text: string): DetectionResult {
     const conf = Math.min(0.99, (hiCount / totalLetters) + 0.15);
     return { code: "hi", name: "Hindi", nativeName: "हिन्दी", confidence: conf, isRomanized: false };
   }
+  if (knCount / totalLetters >= 0.15) {
+    const conf = Math.min(0.99, (knCount / totalLetters) + 0.15);
+    return { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ", confidence: conf, isRomanized: false };
+  }
+  if (mlCount / totalLetters >= 0.15) {
+    const conf = Math.min(0.99, (mlCount / totalLetters) + 0.15);
+    return { code: "ml", name: "Malayalam", nativeName: "മലയാളം", confidence: conf, isRomanized: false };
+  }
 
   // Romanized heuristic
   const words = clean.toLowerCase().replace(/[^\w\s]/g, "").split(/\s+/).filter(Boolean);
@@ -75,12 +95,20 @@ export function detectLanguageClient(text: string): DetectionResult {
   const hiHits = words.filter((w) => HINDI_MARKERS.has(w)).length;
   const teHits = words.filter((w) => TELUGU_MARKERS.has(w)).length;
   const taHits = words.filter((w) => TAMIL_MARKERS.has(w)).length;
+  const knHits = words.filter((w) => KANNADA_MARKERS.has(w)).length;
+  const mlHits = words.filter((w) => MALAYALAM_MARKERS.has(w)).length;
 
-  if (teHits > 0 && teHits >= hiHits && teHits >= taHits) {
+  if (teHits > 0 && teHits >= hiHits && teHits >= taHits && teHits >= knHits && teHits >= mlHits) {
     return { code: "te", name: "Telugu", nativeName: "తెలుగు", confidence: 0.95, isRomanized: true };
   }
-  if (taHits > 0 && taHits >= hiHits) {
+  if (taHits > 0 && taHits >= hiHits && taHits >= knHits && taHits >= mlHits) {
     return { code: "ta", name: "Tamil", nativeName: "தமிழ்", confidence: 0.95, isRomanized: true };
+  }
+  if (knHits > 0 && knHits >= hiHits && knHits >= mlHits) {
+    return { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ", confidence: 0.95, isRomanized: true };
+  }
+  if (mlHits > 0 && mlHits >= hiHits) {
+    return { code: "ml", name: "Malayalam", nativeName: "മലയാളം", confidence: 0.95, isRomanized: true };
   }
   if (hiHits > 0) {
     return { code: "hi", name: "Hindi", nativeName: "हिन्दी", confidence: 0.95, isRomanized: true };

@@ -122,35 +122,41 @@ def human(n: int) -> str:
     return f"{n} TB"
 
 
-def download(url: str, dest: Path) -> Path:
-    """Stream ``url`` to ``dest`` via a temp file; raises SystemExit with a clear message on failure."""
+def download(url: str, dest: Path, max_retries: int = 5) -> Path:
+    """Stream ``url`` to ``dest`` via a temp file with automatic retries; raises SystemExit on failure."""
     dest.parent.mkdir(parents=True, exist_ok=True)
     tmp = dest.with_suffix(dest.suffix + ".part")
     log(f"  downloading {url}")
-    try:
-        with urllib.request.urlopen(url, timeout=120) as resp, open(tmp, "wb") as out:  # noqa: S310 — https URLs only
-            total = int(resp.headers.get("Content-Length") or 0)
-            done = 0
-            next_report = 0.0
-            while True:
-                chunk = resp.read(1 << 20)
-                if not chunk:
-                    break
-                out.write(chunk)
-                done += len(chunk)
+    for attempt in range(1, max_retries + 1):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "ProjectVoice/1.0"})
+            with urllib.request.urlopen(req, timeout=180) as resp, open(tmp, "wb") as out:  # noqa: S310 — https URLs only
+                total = int(resp.headers.get("Content-Length") or 0)
+                done = 0
+                next_report = 0.0
+                while True:
+                    chunk = resp.read(1 << 20)
+                    if not chunk:
+                        break
+                    out.write(chunk)
+                    done += len(chunk)
+                    if total and sys.stdout.isatty():
+                        sys.stdout.write(f"\r    {human(done)} / {human(total)}")
+                        sys.stdout.flush()
+                    elif total and done / total >= next_report:
+                        log(f"    {human(done)} / {human(total)}")
+                        next_report += 0.25
                 if total and sys.stdout.isatty():
-                    sys.stdout.write(f"\r    {human(done)} / {human(total)}")
-                    sys.stdout.flush()
-                elif total and done / total >= next_report:
-                    log(f"    {human(done)} / {human(total)}")
-                    next_report += 0.25
-            if total and sys.stdout.isatty():
-                sys.stdout.write("\n")
-    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as exc:
-        tmp.unlink(missing_ok=True)
-        raise SystemExit(f"download failed for {url}: {exc}") from exc
-    os.replace(tmp, dest)
-    log(f"  sha256 {sha256_of(dest)}  {dest.name} ({human(dest.stat().st_size)})")
+                    sys.stdout.write("\n")
+            os.replace(tmp, dest)
+            log(f"  sha256 {sha256_of(dest)}  {dest.name} ({human(dest.stat().st_size)})")
+            return dest
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as exc:
+            tmp.unlink(missing_ok=True)
+            log(f"  [retry {attempt}/{max_retries}] error downloading {url}: {exc}")
+            if attempt == max_retries:
+                raise SystemExit(f"download failed for {url} after {max_retries} attempts: {exc}") from exc
+            time.sleep(2 * attempt)
     return dest
 
 
@@ -367,12 +373,12 @@ def fetch_indic(models_dir: Path, langs: list[str] | None = None) -> None:
         target_dir.mkdir(parents=True, exist_ok=True)
         for fname in ["config.json", "tokens.txt", "model.onnx"]:
             dest = target_dir / fname
-            if dest.is_file() and dest.stat().st_size > 0:
+            min_size = 100 * 1024 * 1024 if fname == "model.onnx" else 10
+            if dest.is_file() and dest.stat().st_size >= min_size:
                 log(f"  {lang}/{fname} already present ({dest.stat().st_size / (1024*1024):.2f} MB)")
                 continue
             url = f"{base_url}/{lang}/{fname}"
-            log(f"  downloading {url} -> {dest}")
-            urllib.request.urlretrieve(url, dest)
+            download(url, dest)
     log("[indic] all requested models verified and ready on disk.")
 
 

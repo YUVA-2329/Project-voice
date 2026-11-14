@@ -37,9 +37,10 @@ class EngineSettings(BaseSettings):
     ENGINE_MAX_RESIDENT_MODELS: int = 1
     ENGINE_ALLOW_CPU_FALLBACK: bool = True
     ENGINE_NUM_THREADS: int = 0
-    ENGINE_ENABLED: str = "zipvoice_distill,f5tts,indicf5"
+    ENGINE_ENABLED: str = "zipvoice_distill,indiconnx,f5tts,indicf5"
 
     ZIPVOICE_DIR: Path | None = None
+    INDIC_DIR: Path | None = None
 
     F5TTS_CKPT: str = ""
     F5TTS_VOCAB: str = ""
@@ -72,6 +73,11 @@ class EngineSettings(BaseSettings):
             _resolve(self.ZIPVOICE_DIR)
             if self.ZIPVOICE_DIR is not None
             else self.MODELS_DIR / "zipvoice-distill"
+        )
+        self.INDIC_DIR = (
+            _resolve(self.INDIC_DIR)
+            if self.INDIC_DIR is not None
+            else self.MODELS_DIR / "indic"
         )
         self.WHISPER_DIR = (
             _resolve(self.WHISPER_DIR)
