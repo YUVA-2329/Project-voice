@@ -96,23 +96,32 @@ def start_redis():
 def run_migrations():
     print("Applying database migrations (alembic upgrade head)...")
     sys.stdout.flush()
-    res = subprocess.run(
-        [str(VENV_ALEMBIC), "upgrade", "head"],
-        cwd=str(ROOT / "backend"),
-        capture_output=True,
-        text=True,
-        env=os.environ
-    )
-    if res.returncode != 0:
+    for attempt in range(1, 11):
+        res = subprocess.run(
+            [str(VENV_ALEMBIC), "upgrade", "head"],
+            cwd=str(ROOT / "backend"),
+            capture_output=True,
+            text=True,
+            env=os.environ
+        )
+        if res.returncode == 0:
+            print("[OK] Alembic migration succeeded:")
+            for line in res.stdout.strip().splitlines():
+                print(f"  {line}")
+            sys.stdout.flush()
+            return
+        if "starting up" in res.stderr or "connection failed" in res.stderr:
+            print(f"[WAIT] PostgreSQL is initializing (attempt {attempt}/10)...")
+            sys.stdout.flush()
+            time.sleep(2)
+            continue
         print("[FAIL] Alembic migration failed:")
         print(res.stdout)
         print(res.stderr)
         sys.stdout.flush()
         sys.exit(1)
-    print("[OK] Alembic migration succeeded:")
-    for line in res.stdout.strip().splitlines():
-        print(f"  {line}")
-    sys.stdout.flush()
+    print("[FAIL] Alembic migration timed out waiting for database.")
+    sys.exit(1)
 
 
 def start_api():
