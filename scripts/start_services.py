@@ -124,13 +124,42 @@ def run_migrations():
     sys.exit(1)
 
 
+API_PORT = 8000
+
+
+def is_project_voice_api(port: int) -> bool:
+    import json
+    import urllib.request
+    try:
+        req = urllib.request.Request(f"http://127.0.0.1:{port}/api/v1/system/health")
+        with urllib.request.urlopen(req, timeout=1.0) as resp:
+            data = json.loads(resp.read().decode())
+            return data.get("status") == "ok" and "version" in data
+    except Exception:
+        return False
+
+
+def get_api_port() -> int:
+    global API_PORT
+    if is_project_voice_api(8000):
+        API_PORT = 8000
+    elif not is_port_open(8000):
+        API_PORT = 8000
+    else:
+        # Port 8000 is occupied by an external service
+        API_PORT = 8001
+    os.environ["API_INTERNAL_URL"] = f"http://127.0.0.1:{API_PORT}"
+    return API_PORT
+
+
 def start_api():
-    if not is_port_open(8000):
-        print("Starting FastAPI Backend (uvicorn on :8000)...")
+    port = get_api_port()
+    if not is_port_open(port) or not is_project_voice_api(port):
+        print(f"Starting FastAPI Backend (uvicorn on :{port})...")
         sys.stdout.flush()
         api_log = open(RUN_DIR / "api.log", "a", encoding="utf-8")
         api_proc = subprocess.Popen(
-            [str(VENV_UVICORN), "app.main:app", "--host", "127.0.0.1", "--port", "8000"],
+            [str(VENV_UVICORN), "app.main:app", "--host", "127.0.0.1", "--port", str(port)],
             cwd=str(ROOT / "backend"),
             stdout=api_log,
             stderr=api_log,
@@ -139,7 +168,7 @@ def start_api():
         )
         with open(RUN_DIR / "api.pid", "w") as f:
             f.write(str(api_proc.pid))
-        wait_for_port(8000, "FastAPI API")
+        wait_for_port(port, "FastAPI API")
 
 
 def start_worker():
@@ -194,8 +223,8 @@ def main():
     print("\n=======================================================")
     print("   PROJECT VOICE IS FULLY ONLINE & RUNNING!")
     print("   Frontend: http://localhost:5000")
-    print("   API Docs: http://localhost:8000/api/docs")
-    print("   API Health: http://localhost:8000/api/v1/system/health")
+    print(f"   API Docs: http://localhost:{API_PORT}/api/docs")
+    print(f"   API Health: http://localhost:5000/api/v1/system/health")
     print("=======================================================\n")
     sys.stdout.flush()
 
@@ -207,7 +236,7 @@ def main():
                 start_postgres()
             if not is_port_open(6379):
                 start_redis()
-            if not is_port_open(8000):
+            if not is_port_open(API_PORT):
                 start_api()
             if worker_proc.poll() is not None:
                 worker_proc = start_worker()
